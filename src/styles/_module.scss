@@ -1,0 +1,107 @@
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+.cog-wrapper {
+    position: relative;
+    width:50%;
+    height: 50%;
+    margin: 100px 5%;
+}
+
+.cog {
+    animation: barrelRoll 100s infinite linear;
+}
+
+@keyframes barrelRoll {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.innov-icon {
+    background: #ffffff;
+    position: absolute;
+    margin: 0;
+    width: 10%;
+    /*height: auto;*/
+    /*padding-bottom:5%;*/
+    border-radius:50%;
+    position: absolute;
+    margin: 0;
+    transition: opacity 500ms;
+}
+
+.innov-icon:hover {
+    opacity: 0.85;
+    cursor: pointer;
+}
+
+.innov-icon svg {
+    max-width: 100%;
+    max-height: 100%;
+}
+.top {
+    top: 5%;
+}
+
+.center {
+    left: 45%;
+}
+
+.right {
+    left: 72%
+}
+
+.top.right {
+    top: 13%;
+}
+
+.middle.right {
+    top: 38%;
+    left: 84%;
+}
+
+.lower.right {
+    top: 66%;
+    left: 82%;
+}
+
+.bottom.right {
+    top: 84%;
+    left: 59%;
+}
+
+.bottom.left {
+    top: 84%;
+    left: 31%;
+}
+
+.lower.left {
+    top: 66%;
+    left: 10%;
+}
+
+.middle.left {
+    top: 38%;
+    left: 6%;
+}
+
+.top.left {
+    top: 13%;
+    left: 18%;
+}
+
+
+.poster {
+    position: absolute;
+    width: 50%;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+
+button {
+    background: black;
+    color: white;
+    border: 0;
+}
