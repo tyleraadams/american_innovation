@@ -18,8 +18,8 @@
     100% { transform: rotate(360deg); }
 }
 
-.innov-icon {
-    background: #ffffff;
+.innov {
+    background: $white;
     position: absolute;
     margin: 0;
     width: 10%;
@@ -29,14 +29,30 @@
     position: absolute;
     margin: 0;
     transition: opacity 500ms;
+    outline: none;
 }
 
-.innov-icon:hover {
+
+
+.chosen {
+    width: 20%;
+    font-size: 2em;
+}
+
+.innov:hover {
     opacity: 0.85;
     cursor: pointer;
 }
 
-.innov-icon svg {
+.disabled {
+    background: $black;
+    &:hover {
+        cursor: default;
+        opacity: 1;
+    }
+}
+
+.innov svg {
     max-width: 100%;
     max-height: 100%;
 }
@@ -51,44 +67,46 @@
 .right {
     left: 72%
 }
+.innov {
+    &:first-of-type {
+        top: 13%;
+        left: 72%
+    }
 
-.top.right {
-    top: 13%;
-}
+     &:nth-of-type(2) {
+        top: 38%;
+        left: 84%;
+    }
 
-.middle.right {
-    top: 38%;
-    left: 84%;
-}
+    .lower.right {
+        top: 66%;
+        left: 82%;
+    }
 
-.lower.right {
-    top: 66%;
-    left: 82%;
-}
+    .bottom.right {
+        top: 84%;
+        left: 59%;
+    }
 
-.bottom.right {
-    top: 84%;
-    left: 59%;
-}
+    .bottom.left {
+        top: 84%;
+        left: 31%;
+    }
 
-.bottom.left {
-    top: 84%;
-    left: 31%;
-}
+    .lower.left {
+        top: 66%;
+        left: 10%;
+    }
 
-.lower.left {
-    top: 66%;
-    left: 10%;
-}
+    .middle.left {
+        top: 38%;
+        left: 6%;
+    }
 
-.middle.left {
-    top: 38%;
-    left: 6%;
-}
-
-.top.left {
-    top: 13%;
-    left: 18%;
+    .top.left {
+        top: 13%;
+        left: 18%;
+    }
 }
 
 
