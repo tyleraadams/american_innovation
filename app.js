@@ -10,8 +10,13 @@ var bodyParser = require("body-parser");
 var obj;
 var yearInMs = 31536000000;
 
-app.use(compression());
+var dotenv = require('dotenv');
 
+
+// There's no need to check if .env exists, dotenv will check this // for you. It will show a small warning which can be disabled when // using this in production.
+
+dotenv.load();
+app.use(compression());
 
 //Here we are configuring express to use body-parser as middle-ware.
 app.use(bodyParser.urlencoded({ extended: false }));

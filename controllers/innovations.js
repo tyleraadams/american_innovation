@@ -2,19 +2,26 @@ var express = require('express')
   , router = express.Router()
   , Innovation = require('../models/Innovation')
   , Vote = require('../models/Vote')
+  , Round = require('../models/Round')
   , Cookies = require('cookies');
 
 router.get('/', function(req, res) {
-    console.log(process.env.COOKIE_KEY);
   var cookies = new Cookies( req, res,  [process.env.COOKIE_KEY]);
-  Innovation.find(function (err, innovations) {
-    if (err) return console.error(err);
-        if (cookies.get('voted'), {signed: true}) {
-            innovations.push({ votedCookie: cookies.get('voted', {signed: true}) });
-        }
+  var round = new Round();
 
-        res.send(innovations);
-    });
+  round.findInnovationsForThisRound(function (err, currentRound) {
+    console.log(currentRound[0]);
+    console.log(currentRound[0].competitors);
+    res.send(currentRound[0].competitors);
+  });
+  // Innovation.find(function (err, innovations) {
+  //   if (err) return console.error(err);
+  //       if (cookies.get('voted'), {signed: true}) {
+  //           innovations.push({ votedCookie: cookies.get('voted', {signed: true}) });
+  //       }
+
+  //       res.send(innovations);
+  //   });
 });
 
 // Domestic animals page
