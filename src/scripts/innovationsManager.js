@@ -26,9 +26,10 @@ let innovationsManager = {
 
 
         this.get('/innovations').then(function(response) {
+          // console.log('hello, !this!! is yo@ur! response: ', response);
             let innovations = response;
             let buttons = that.insertButtonsIntoDom(innovations).getElementsByClassName('innov');
-
+              // console.log('hello, !this!! is yo@ur! buttons: ', buttons);
              // = document.getElementsByClassName('innov');
             // console.log(buttons.querySelectorAll('button'));
             Array.prototype.forEach.call(buttons, (button, index) => {
@@ -71,7 +72,7 @@ let innovationsManager = {
         req.send();
       });
     },
-    // expecitng an array of objects back from the server
+    // expecitng an array of objects back from the server [{name: 'Cell Phone'}]
     buildInnovations: function (serverResponse) {
         let frag = document.createDocumentFragment();
         let alreadyVotedFlag;
@@ -84,7 +85,7 @@ let innovationsManager = {
             innovationVotedFor = serverResponse.pop().votedCookie;
             // console.log('this is supposed to be what the person voted for: ', serverResponse.pop())
         }
-
+        console.log('serverResponse parsed: ', serverResponse);
         innovations = serverResponse;
         innovations.forEach(function(innovation, index) {
             if (innovation.hasOwnProperty('name')) {
@@ -114,6 +115,7 @@ let innovationsManager = {
     },
 
     insertButtonsIntoDom: function (innovations) {
+      console.log('these are the innovations inside insertbuttonsintodom: ', innovations);
        let frag = this.buildInnovations(innovations);
        let votingForm = document.getElementsByClassName('voting-form')[0];
        votingForm.appendChild(frag);

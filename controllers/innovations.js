@@ -10,9 +10,21 @@ router.get('/', function(req, res) {
   var round = new Round();
 
   round.findInnovationsForThisRound(function (err, currentRound) {
-    console.log(currentRound[0]);
-    console.log(currentRound[0].competitors);
-    res.send(currentRound[0].competitors);
+    // console.log(currentRound)
+    if (currentRound && currentRound[0] && currentRound[0].competitors) {
+      // console.log('hello world!)');
+      // console.log(currentRound[0]);
+      // console.log(currentRound[0].competitors);
+
+      var competitors = currentRound[0].competitors;
+      console.log(competitors);
+      Innovation.find( { name: {$in: competitors}  }, function (err, innovations) {
+        if (err) console.error(err);
+        console.log(innovations);
+        res.send(innovations);
+      });
+
+    }
   });
   // Innovation.find(function (err, innovations) {
   //   if (err) return console.error(err);

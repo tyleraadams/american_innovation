@@ -20,12 +20,26 @@
         <![endif]-->
 
         <section class="cog-wrapper">
+        <p>The Takeaway’s search for ‘America’s Greatest Innovation’ is supported by the American Society Mechanical Engineers and is, in part, funded by the Lemelson Foundation.</p>
+
             <svg  class="cog" viewBox="0 0 64 64" width="100%" height="100%" fill="currentcolor">
                 <path d="M 29.200362767170432 0 L 34.79963723282957 0 L 38.2116570824605 8.81778016906236 A 24 24 0 0 1 42.14283828177679 10.248613111120402 L 50.42455696501117 5.687005695312748 L 54.71385005492734 9.286149945072658 L 51.6596490629358 18.234165527574895 A 24 24 0 0 1 53.751386888879594 21.857161718223214 L 63.02769619278132 23.68615386214603 L 64 29.200362767170432 L 55.908672754201895 34.091737825943795 A 24 24 0 0 1 55.18221983093764 38.2116570824605 L 61.112631537516826 45.57544303498882 L 58.31299430468726 50.42455696501118 L 48.97056274847714 48.970562748477136 A 24 24 0 0 1 45.765834472425105 51.6596490629358 L 45.57544303498883 61.11263153751682 L 40.31384613785398 63.02769619278132 L 34.091737825943795 55.908672754201895 A 24 24 0 0 1 29.9082621740562 55.908672754201895 L 23.68615386214603 63.02769619278132 L 18.424556965011178 61.11263153751682 L 18.234165527574902 51.65964906293581 A 24 24 0 0 1 15.029437251522861 48.97056274847714 L 5.687005695312745 50.42455696501118 L 2.8873684624831775 45.57544303498882 L 8.817780169062363 38.211657082460505 A 24 24 0 0 1 8.091327245798105 34.09173782594381 L 0 29.200362767170425 L 0.9723038072186858 23.68615386214602 L 10.248613111120399 21.857161718223217 A 24 24 0 0 1 12.34035093706419 18.234165527574902 L 9.286149945072655 9.286149945072664 L 13.575443034988819 5.6870056953127515 L 21.857161718223203 10.248613111120406 A 24 24 0 0 1 25.788342917539506 8.81778016906236 M 32 13 A 19 19 0 0 0 32 51 A 19 19 0 0 0 32 13"></path>
             </svg>
             <div class="messages"></div>
             <form class="voting-form" method="POST" action="/innovations"></form>
-
+            <form class="wild-card" method="POST" action="/wild_card">
+                <label for='name'>Name</label>
+                <input type='text' name="name">
+                <label for='email'>Email</label>
+                <input type='email' name="email">
+                <label for='phone'>Phone</label>
+                <input type='text' name="phone">
+                <label for='innovation'>Innovation</label>
+                <input type='text' name="innovation">
+                <label for='description'>Description</label>
+                <textarea name="description" maxlength='200'></textarea>
+                <input type='submit'>
+            </form>
             <!-- <article>
             <figure class="poster"><img src="https://upload.wikimedia.org/wikipedia/commons/1/14/Mobile_phone_font_awesome.svg"></figure>
             <div class="bodywrapper">
@@ -71,7 +85,7 @@
         <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
         <!-- <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script> -->
         <!-- <script src="js/plugins.js"></script> -->
-        <script src="js/main.js"></script>
+        <script src="js/main.min.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

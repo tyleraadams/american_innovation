@@ -1,6 +1,6 @@
 let messageManager = {
     init: function () {
-
+      console.log('hellow !');
     },
 
     showMessage: function (message) {
@@ -13,7 +13,7 @@ let messageManager = {
     },
 
     clearMessages: function (container) {
-        container.innerHTML = '';
+      container.innerHTML = '';
     }
 
 

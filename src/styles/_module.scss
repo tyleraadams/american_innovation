@@ -19,7 +19,7 @@
 }
 
 .innov {
-    background: $white;
+    background: blue;
     position: absolute;
     margin: 0;
     width: 10%;
@@ -73,39 +73,54 @@
         left: 72%
     }
 
-     &:nth-of-type(2) {
+    &:nth-of-type(2) {
         top: 38%;
         left: 84%;
     }
 
-    .lower.right {
-        top: 66%;
+    &:nth-of-type(3) {
+         top: 66%;
         left: 82%;
     }
 
-    .bottom.right {
+    &:nth-of-type(4) {
         top: 84%;
         left: 59%;
     }
 
-    .bottom.left {
+    // .lower.right {
+    //     top: 66%;
+    //     left: 82%;
+    // }
+
+    // .bottom.right {
+    //     top: 84%;
+    //     left: 59%;
+    // }
+
+    &:nth-of-type(5) {
         top: 84%;
         left: 31%;
     }
 
-    .lower.left {
+    &:nth-of-type(6) {
         top: 66%;
         left: 10%;
     }
 
-    .middle.left {
+    &:nth-of-type(7) {
         top: 38%;
         left: 6%;
     }
 
-    .top.left {
+    &:nth-of-type(8) {
         top: 13%;
         left: 18%;
+    }
+
+    &:nth-of-type(9) {
+        top: 10%;
+        left: 48%;
     }
 }
 
