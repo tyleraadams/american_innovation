@@ -5,6 +5,9 @@ var express = require('express')
   , Round = require('../models/Round')
   , Cookies = require('cookies');
 
+// we should set this with a cookie on get /
+var CurrentRound;
+
 router.get('/', function(req, res) {
   var cookies = new Cookies( req, res,  [process.env.COOKIE_KEY]);
   var round = new Round();
@@ -15,7 +18,7 @@ router.get('/', function(req, res) {
       // console.log('hello world!)');
       // console.log(currentRound[0]);
       // console.log(currentRound[0].competitors);
-
+      CurrentRound = currentRound[0];
       var competitors = currentRound[0].competitors;
       console.log(competitors);
       Innovation.find( { name: {$in: competitors}  }, function (err, innovations) {
@@ -40,7 +43,9 @@ router.get('/', function(req, res) {
 router.post('/*', function(req, res) {
     var cookies = new Cookies( req, res, [process.env.COOKIE_KEY]);
     var votedForInnovation = req.params[0].replace(/-/, ' ');
-    var round = 'Round 1';
+    var round = CurrentRound._id;
+
+
     var ip = req.headers['x-forwarded-for'] ||
      req.connection.remoteAddress ||
      req.socket.remoteAddress ||
@@ -55,10 +60,10 @@ router.post('/*', function(req, res) {
         });
         cookies.set('voted', votedForInnovation, { signed: true } );
         vote.save(function (err, vote) {
-            res.send('Thank you for voting, check back next week!');
+            res.send('Thank you for voting, please check back ' + CurrentRound.ending_date);
         });
     } else {
-        res.send('Sorry, you already voted!');
+        res.send('Sorry, you already voted! Please check back ' + CurrentRound.ending_date);
     }
 
 });
