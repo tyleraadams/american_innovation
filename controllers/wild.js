@@ -6,7 +6,7 @@ var express = require('express')
   , Cookies = require('cookies')
   , Wild = require('../models/Wild');
 
-// we should set this with a cookie on get /
+// we should set this with a cookie on get / or use an ENV varaible
 var CurrentRound;
 
 router.post('/*', function(req, res) {
@@ -24,6 +24,7 @@ router.post('/*', function(req, res) {
     if (!cookies.get('voted',  { signed: true })) {
         // console.log(req);
         var input = req.body;
+        input.ip = ip;
         var wild = new Wild(input);
         cookies.set('voted', wild.name, { signed: true } );
         wild.save(function (err, vote) {

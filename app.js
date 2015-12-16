@@ -6,6 +6,7 @@ var fs = require('fs');
 var  db = require('./models/db');
 var controllers = require('./controllers');
 var bodyParser = require("body-parser");
+var schedule = require("./schedule");
 // var favicon = require('serve-favicon');
 var obj;
 var yearInMs = 31536000000;
