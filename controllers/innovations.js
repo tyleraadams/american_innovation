@@ -9,20 +9,20 @@ var express = require('express')
 var CurrentRound;
 
 router.get('/', function(req, res) {
-  var cookies = new Cookies( req, res,  [process.env.COOKIE_KEY]);
-  var round = new Round();
+  // var cookies = new Cookies( req, res,  [process.env.COOKIE_KEY]);
+  // var round = new Round();
 
-  round.findInnovationsForThisRound(function (err, currentRound) {
-    if (currentRound && currentRound[0] && currentRound[0].competitors) {
-      CurrentRound = currentRound[0];
-      var competitors = currentRound[0].competitors;
-      Innovation.find( { name: {$in: competitors}  }, function (err, innovations) {
-        if (err) console.error(err);
-        res.send(innovations);
-      });
+  // round.findInnovationsForThisRound(function (err, currentRound) {
+  //   if (currentRound && currentRound[0] && currentRound[0].competitors) {
+  //     CurrentRound = currentRound[0];
+  //     var competitors = currentRound[0].competitors;
+  //     Innovation.find( { name: {$in: competitors}  }, function (err, innovations) {
+  //       if (err) console.error(err);
+  //       res.send(innovations);
+  //     });
 
-    }
-  });
+  //   }
+  // });
   // Innovation.find(function (err, innovations) {
   //   if (err) return console.error(err);
   //       if (cookies.get('voted'), {signed: true}) {
