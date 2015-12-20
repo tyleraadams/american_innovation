@@ -13,7 +13,7 @@
 .voting-form {
     position: absolute;
     top:0;
-    @include putOnCircle(9, 588px, 80px, false);
+    @include putOnCircle(9, 450px, 90px, false);
 }
 
 .cog {

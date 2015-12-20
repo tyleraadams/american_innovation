@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import votingManager from './votingManager';
+import nanoModal from 'nanomodal';
 
 let innovationsManager = {
     init: function () {
@@ -9,20 +10,37 @@ let innovationsManager = {
         let cog = document.getElementsByClassName('cog')[0];
         let clickHandler = (event) => {
             event.preventDefault();
-
-            if (!event.currentTarget.classList.contains('disabled')) {
-                votingManager.submitVote(event.currentTarget.getAttribute('formaction'));
-                event.currentTarget.classList.add('chosen');
-                cog.classList.add('voted');
-                debugger
-                let currentChild = event.currentTarget.parentNode.firstElementChild;
-                console.log(currentChild);
-                currentChild.classList.add('disabled');
-                while (currentChild.nextSibling) {
-                    currentChild = currentChild.nextSibling;
-                    currentChild.classList.add('disabled');
-                };
+            let targetButton = event.currentTarget;
+            let action = targetButton.getAttribute('formaction');
+            let name = targetButton.getAttribute('data-name');
+            let description = targetButton.getAttribute('data-description');
+            let src = targetButton.getAttribute('data-image');
+            let modalYesHandler = (modal) => {
+              // console.log('!! ', modal);
+              votingManager.submitVote(action);
+              cog.classList.add('voted');
+              modal.hide();
             }
+            let modalNoHandler = (modal) => {
+              modal.hide();
+            }
+            // if (!event.currentTarget.classList.contains('disabled')) {
+                // votingManager.submitVote(event.currentTarget.getAttribute('formaction'));
+
+                var buttons = [{text: 'Yes', handler: modalYesHandler}, {text: 'Cancel', handler:modalNoHandler}]
+                var justTextModal = nanoModal(`<h2>${name}</h2><img src=${src} alt=${name}><p>${description}</p><p>Would you like to vote for this innnovation?</p>`, {buttons: buttons});
+                justTextModal.show();
+                // event.currentTarget.classList.add('chosen');
+                // cog.classList.add('voted');
+
+                // let currentChild = event.currentTarget.parentNode.firstElementChild;
+                // console.log(currentChild);
+                // currentChild.classList.add('disabled');
+                // while (currentChild.nextSibling) {
+                //     currentChild = currentChild.nextSibling;
+                //     currentChild.classList.add('disabled');
+                // };
+            // }
             // console.log(event.currentTarget);
             // console.log(event.target);
             // console.log(event.currentTarget.dataset.name);
@@ -110,6 +128,9 @@ let innovationsManager = {
                     }
                 } else {
                     button.setAttribute('type', 'submit');
+                    button.setAttribute('data-name', innovation.name);
+                    button.setAttribute('data-description', innovation.description);
+                    button.setAttribute('data-image', innovation.image);
                     button.setAttribute('formaction', `/innovations/${innovation.name.replace(/\s/g, '-')}`);
                 }
                 button.appendChild(img);
