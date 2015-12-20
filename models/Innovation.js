@@ -5,6 +5,8 @@ var InnovationSchema = new mongoose.Schema({
   votes: Array,
   description: String,
   eliminated: Boolean,
+  image: String,
+  thumb: String,
   updated_at: { type: Date, default: Date.now }
 });
 

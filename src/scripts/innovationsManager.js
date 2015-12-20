@@ -6,13 +6,17 @@ let innovationsManager = {
 
 
         let that = this;
+        let cog = document.getElementsByClassName('cog')[0];
         let clickHandler = (event) => {
             event.preventDefault();
 
             if (!event.currentTarget.classList.contains('disabled')) {
                 votingManager.submitVote(event.currentTarget.getAttribute('formaction'));
                 event.currentTarget.classList.add('chosen');
-                let currentChild = event.currentTarget.parentNode.firstChild;
+                cog.classList.add('voted');
+                debugger
+                let currentChild = event.currentTarget.parentNode.firstElementChild;
+                console.log(currentChild);
                 currentChild.classList.add('disabled');
                 while (currentChild.nextSibling) {
                     currentChild = currentChild.nextSibling;
@@ -91,6 +95,10 @@ let innovationsManager = {
             if (innovation.hasOwnProperty('name')) {
                 console.log('innovationVotedFor: ', innovationVotedFor);
                 let button = document.createElement('button');
+                let img = document.createElement('img');
+                img.src = innovation.thumb;
+                img.alt = innovation.name;
+
                 button.classList.add('innov');
                 button.innerText = innovation.name;
                 // button.setAttribute('method', 'POST');
@@ -104,7 +112,7 @@ let innovationsManager = {
                     button.setAttribute('type', 'submit');
                     button.setAttribute('formaction', `/innovations/${innovation.name.replace(/\s/g, '-')}`);
                 }
-
+                button.appendChild(img);
                 frag.appendChild(button);
             }
 
