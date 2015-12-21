@@ -121,7 +121,7 @@ let innovationsManager = {
                 img.alt = innovation.name;
 
                 button.classList.add('innov');
-                button.innerText = innovation.name;
+                // button.innerText = innovation.name;
                 // button.setAttribute('method', 'POST');
                 //
                 if (alreadyVotedFlag) {

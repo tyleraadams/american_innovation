@@ -17,6 +17,8 @@ body {
     position: absolute;
     top:0;
     @include putOnCircle(9, 450px, 120px, false);
+    height: 552px;
+    left:5%;
 }
 
 .cog {
@@ -24,8 +26,8 @@ body {
     // stroke: $black;
     position: absolute;
     // stroke-width: 0.15px;
-    width: 600px;
-    height:600px;
+    width: 700px;
+    height:700px;
 
     &:nth-of-type(2) {
         right:23% ;
