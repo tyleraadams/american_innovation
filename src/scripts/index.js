@@ -1,4 +1,5 @@
 import innovationsManager from './innovationsManager';
+import wildManager from './wildManager';
 // let eatMe = (food) => {
 //   console.log('eatme');
 // }
@@ -7,5 +8,6 @@ import innovationsManager from './innovationsManager';
 //
 document.addEventListener("DOMContentLoaded", function(event) {
   innovationsManager.init();
+  wildManager.init();
 });
 

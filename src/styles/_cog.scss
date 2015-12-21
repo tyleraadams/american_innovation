@@ -13,7 +13,7 @@
 .voting-form {
     position: absolute;
     top:0;
-    @include putOnCircle(9, 450px, 90px, false);
+    @include putOnCircle(9, 450px, 120px, false);
 }
 
 .cog {
@@ -37,10 +37,12 @@
     // background: blue;
     position: absolute;
     margin: 0;
-    width: 10%;
+    background: none;
+    color: $black;
+    // width: 10%;
     /*height: auto;*/
     /*padding-bottom:5%;*/
-    border-radius:50%;
+    // border-radius:50%;
     position: absolute;
     margin: 0;
     transition: opacity 500ms;
