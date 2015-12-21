@@ -13,6 +13,7 @@ router.get('/', function(req, res) {
   var round = new Round();
 
   round.findInnovationsForThisRound(function (err, currentRound) {
+    console.log(currentRound);
     if (currentRound && currentRound[0] && currentRound[0].competitors) {
       CurrentRound = currentRound[0];
       var competitors = currentRound[0].competitors;

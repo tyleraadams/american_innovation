@@ -1,3 +1,37 @@
 .nanoModal.nanoModalOverride {
     position: fixed;
+    width: 600px;
+    text-align: center;
+    background: $white;
+    &:before {
+        content: '';
+        background: $blue;
+        height: 50%;
+        width:100%;
+        transform: skewY(4deg);
+        position: absolute;
+        top:-30px;
+        left:0;
+        z-index:1;
+    }
+    &:after {
+        content: '';
+        background: $white;
+        height: 15%;
+        width:100%;
+        transform: skewY(4deg);
+        position: absolute;
+        bottom: -25px;
+        left:0;
+        z-index:0;
+    }
+}
+.nanoModalContent {
+    background: transparent;
+    z-index:2;
+    position: relative;
+}
+.nanoModalButtons {
+    z-index: 2;
+    position:relative;
 }

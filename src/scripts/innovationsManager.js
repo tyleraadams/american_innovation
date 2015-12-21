@@ -7,7 +7,7 @@ let innovationsManager = {
 
 
         let that = this;
-        let cog = document.getElementsByClassName('cog')[0];
+        let cogs = document.getElementsByClassName('cog');
         let clickHandler = (event) => {
             event.preventDefault();
             let targetButton = event.currentTarget;
@@ -18,7 +18,10 @@ let innovationsManager = {
             let modalYesHandler = (modal) => {
               // console.log('!! ', modal);
               votingManager.submitVote(action);
-              cog.classList.add('voted');
+
+              for (var i = 0; i < cogs.length; ++i) {
+                cogs[i].classList.add('voted');
+              }
               modal.hide();
             }
             let modalNoHandler = (modal) => {
