@@ -117,11 +117,12 @@ let innovationsManager = {
                 console.log('innovationVotedFor: ', innovationVotedFor);
                 let button = document.createElement('button');
                 let img = document.createElement('img');
+                let span = document.createElement('span');
                 img.src = innovation.thumb;
                 img.alt = innovation.name;
 
                 button.classList.add('innov');
-                // button.innerText = innovation.name;
+                span.innerText = innovation.name;
                 // button.setAttribute('method', 'POST');
                 //
                 if (alreadyVotedFlag) {
@@ -136,6 +137,7 @@ let innovationsManager = {
                     button.setAttribute('data-image', innovation.image);
                     button.setAttribute('formaction', `/innovations/${innovation.name.replace(/\s/g, '-')}`);
                 }
+                button.appendChild(span);
                 button.appendChild(img);
                 frag.appendChild(button);
             }

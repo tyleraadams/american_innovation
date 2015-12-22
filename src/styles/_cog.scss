@@ -14,11 +14,17 @@ body {
 
 }
 .voting-form {
-    position: absolute;
-    top:0;
-    @include putOnCircle(9, 450px, 120px, false);
-    height: 552px;
-    left:5%;
+    // position: absolute;
+    // top:0;
+    // @include putOnCircle(9, 450px, 120px, false);
+    // height: 552px;
+    width:50%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin: 0 auto;
+     align-content: space-around;
+    height: 650px;
 }
 
 .cog {
@@ -62,18 +68,50 @@ body {
 
 .innov {
     // background: blue;
-    position: absolute;
+    // position: absolute;
     margin: 0;
-    background: none;
+    background: $white;
     color: $black;
+    height: 100px;
     // width: 10%;
     /*height: auto;*/
     /*padding-bottom:5%;*/
     // border-radius:50%;
-    position: absolute;
-    margin: 0;
-    transition: opacity 500ms;
+    // position: absolute;
+    // margin: 0;
+    // display:block;
+    transition: opacity 100ms;
     outline: none;
+    position: relative;
+    z-index:1;
+    width: 20%;
+    min-width: 300px;
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    border: 1px solid #cccccc;
+    opacity:0.75;
+    //    -webkit-order: 0;
+    // -ms-flex-order: 0;
+    // order: 0;
+    // -webkit-flex: 0 1 auto;
+    // -ms-flex: 0 1 auto;
+    // flex: 0 1 auto;
+    // -webkit-align-self: auto;
+    // -ms-flex-item-align: auto;
+    // align-self: auto;
+
+    img {
+        max-height: 100%;
+        // float: left;
+    }
+    span {
+        // float: right;
+        font-size: 1.5em;
+        order:1;
+        align-self: center;
+        // justify-self: space-around;
+    }
 }
 
 h1 {
@@ -123,8 +161,14 @@ h1 {
 }
 
 .innov:hover {
-    opacity: 0.85;
+    opacity: 1;
+    background: $black;
+    color: $white;
     cursor: pointer;
+    img {
+
+        filter: invert(1);
+    }
 }
 
 .disabled {
