@@ -1,12 +1,20 @@
 import nanoModal from 'nanomodal';
 let wildManager = {
   init: function () {
-    console.log('hellow !');
-
-    var modalObj = nanoModal(document.getElementsByClassName('wild-card')[0]);
-    // modalObj.setContent(document.getElementsByClassName('wild-card')[0]);
-    let nominateButton = document.getElementsByClassName('nominate')[0];
-    nominateButton.addEventListener('click', function (event) {
+    // debugger;
+    let openModalButton = document.getElementsByClassName('nominate')[0];
+    let yesButton  = {
+      text: 'Submit',
+      handler: function(modal) {
+        // do something...
+        alert("doing something...");
+        modal.hide();
+      }
+    }
+    var modalObj = nanoModal(document.getElementsByClassName('wild-card')[0],
+      { buttons: [  yesButton ]});
+       // modalObj.setContent(document.getElementsByClassName('wild-card')[0]);
+    openModalButton.addEventListener('click', function (event) {
       modalObj.show();
     });
   },
