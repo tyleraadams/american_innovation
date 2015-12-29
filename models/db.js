@@ -7,13 +7,12 @@ var fixtures = require('./fixtures');
 var Innovation = require('../models/Innovation')
   , Round = require('../models/Round');
 
-var round = new Round();
-var innovation = new Innovation();
 
 Round.find({}, function (err, results) {
 
   if (!results.length) {
     fixtures.rounds.forEach(function(item, index) {
+       var round = new Round(item);
       round.save(item);
     });
   }

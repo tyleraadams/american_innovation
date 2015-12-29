@@ -13,7 +13,7 @@ RoundSchema.methods.findInnovationsForThisRound = function (cb) {
 
   // var startDate = new Date(2013, 1, 12)
   // , endDate   = new Date(2013, 1, 15)
-  var today  = new Date('2015-12-15T00:00:00-05:00');
+  var today  = new Date();
   // today = today.toISOString();
   // console.log(today);
   // this.model('Round').find({}, function (err, result){
