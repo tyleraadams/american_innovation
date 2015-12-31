@@ -1,3 +1,26 @@
+
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+@mixin mobile {
+  @media (max-width: #{$tablet-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}
+
+
 @mixin putOnCircle($nb-items, $circle-size, $item-size, $class-for-IE: false) {
   $half-item:     $item-size / 2;
   $half-parent: $circle-size / 2;

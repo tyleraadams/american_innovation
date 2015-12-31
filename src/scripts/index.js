@@ -8,6 +8,6 @@ import wildManager from './wildManager';
 //
 document.addEventListener("DOMContentLoaded", function(event) {
   innovationsManager.init();
-  wildManager.init();
+
 });
 

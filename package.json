@@ -40,13 +40,14 @@
     "moment-range": "^2.0.3",
     "mongodb": "^2.0.49",
     "mongoose": "^4.3.1",
+    "nanomodal": "^5.1.1",
     "node-schedule": "^0.6.0",
     "nodemon": "^1.8.1",
     "rimraf": "2.4.3",
+    "validate-js": "^2.0.0",
+    "vex-js": "^2.3.3",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "1.1.0",
-    "watchify": "3.6.0",
-    "vex-js": "^2.3.3",
-    "nanomodal": "^5.1.1"
+    "watchify": "3.6.0"
   }
 }

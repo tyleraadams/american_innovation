@@ -19,7 +19,11 @@ router.get('/', function(req, res) {
       var competitors = currentRound[0].competitors;
       Innovation.find( { name: {$in: competitors}  }, function (err, innovations) {
         if (err) console.error(err);
-        res.send(innovations);
+        if (cookies.get('voted')) {
+          innovations.push({ votedCookie: cookies.get('voted') });
+        }
+        CurrentRound.competitors = innovations;
+        res.send(CurrentRound);
       });
 
     }
@@ -47,13 +51,13 @@ router.post('/*', function(req, res) {
      req.connection.socket.remoteAddress;
 
 
-    if (!cookies.get('voted',  { signed: true })) {
+    if (!cookies.get('voted')) {
         var vote = new Vote ({
             votedFor: votedForInnovation,
             round: round,
             ip: ip
         });
-        cookies.set('voted', votedForInnovation, { signed: true } );
+        cookies.set('voted', votedForInnovation);
         vote.save(function (err, vote) {
             res.send('Thank you for voting, please check back ' + CurrentRound.ending_date);
         });

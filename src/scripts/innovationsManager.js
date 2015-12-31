@@ -1,5 +1,7 @@
 import _ from 'lodash';
 import votingManager from './votingManager';
+import wildManager from './wildManager';
+import messageManager from './messageManager';
 import nanoModal from 'nanomodal';
 
 let innovationsManager = {
@@ -9,28 +11,39 @@ let innovationsManager = {
         let that = this;
         let cogs = document.getElementsByClassName('cog');
         let clickHandler = (event) => {
-            event.preventDefault();
-            let targetButton = event.currentTarget;
-            let action = targetButton.getAttribute('formaction');
-            let name = targetButton.getAttribute('data-name');
-            let description = targetButton.getAttribute('data-description');
-            let src = targetButton.getAttribute('data-image');
-            let modalYesHandler = (modal) => {
-              // console.log('!! ', modal);
-              votingManager.submitVote(action);
+          event.preventDefault();
+          let targetButton = event.currentTarget;
+          let action = targetButton.getAttribute('formaction');
+          let name = targetButton.getAttribute('data-name');
+          let description = targetButton.getAttribute('data-description');
+          let src = targetButton.getAttribute('data-image');
+          let isDisabled = targetButton.classList.contains('disabled');
+          let modalYesHandler = (modal) => {
+            // console.log('!! ', modal);
+            votingManager.submitVote(action);
 
-              for (var i = 0; i < cogs.length; ++i) {
-                cogs[i].classList.add('voted');
-              }
-              modal.hide();
+            for (var i = 0; i < cogs.length; ++i) {
+              cogs[i].classList.add('voted');
             }
-            let modalNoHandler = (modal) => {
-              modal.hide();
-            }
+            modal.hide();
+          }
+          let modalNoHandler = (modal) => {
+            modal.hide();
+          }
+
+          let modalYesButton = {text: 'Yes'};
+          // let modalYesButton = Object.assign({}, yesButton);
+
+
+          if (isDisabled) {
+            modalYesButton.classes = 'disabled';
+          } else {
+            modalYesButton.handler = modalYesHandler;
+          }
             // if (!event.currentTarget.classList.contains('disabled')) {
                 // votingManager.submitVote(event.currentTarget.getAttribute('formaction'));
 
-                var buttons = [{text: 'Yes', handler: modalYesHandler}, {text: 'Cancel', handler:modalNoHandler}]
+                var buttons = [modalYesButton, {text: 'Cancel', handler:modalNoHandler}];
                 var justTextModal = nanoModal(`<h2>${name}</h2><img src=${src} alt=${name}><p>${description}</p><p>Would you like to vote for this innnovation?</p>`, {buttons: buttons});
                 justTextModal.show();
                 // event.currentTarget.classList.add('chosen');
@@ -104,14 +117,23 @@ let innovationsManager = {
 
         let innovations;
         let innovationVotedFor;
+        let currentRound = serverResponse;
         serverResponse = JSON.parse(serverResponse);
-        alreadyVotedFlag = serverResponse[serverResponse.length - 1].hasOwnProperty('votedCookie');
+        let comeBackDate =  JSON.parse(currentRound)['ending_date'];
+        let competitors = serverResponse.competitors;
+        console.log(currentRound);
+        alreadyVotedFlag = competitors[competitors.length - 1].hasOwnProperty('votedCookie');
+         sessionStorage.setItem('currentRound', currentRound);
+         wildManager.init();
         if (alreadyVotedFlag) {
-            innovationVotedFor = serverResponse.pop().votedCookie;
-            // console.log('this is supposed to be what the person voted for: ', serverResponse.pop())
+            innovationVotedFor = competitors.pop().votedCookie;
+            sessionStorage.setItem('innovationVotedFor', innovationVotedFor);
+
+            messageManager.showMessage(`You have already voted. Please check back ${comeBackDate}`)
+            // console.log('this is supposed to be what the person voted for: ', competitors.pop())
         }
-        console.log('serverResponse parsed: ', serverResponse);
-        innovations = serverResponse;
+        // console.log('competitors parsed: ', competitors);
+        innovations = competitors;
         innovations.forEach(function(innovation, index) {
             if (innovation.hasOwnProperty('name')) {
                 console.log('innovationVotedFor: ', innovationVotedFor);
@@ -125,16 +147,18 @@ let innovationsManager = {
                 span.innerText = innovation.name;
                 // button.setAttribute('method', 'POST');
                 //
+                button.setAttribute('data-name', innovation.name);
+                button.setAttribute('data-description', innovation.description);
+                button.setAttribute('data-image', innovation.image);
                 if (alreadyVotedFlag) {
                     button.classList.add('disabled');
+
                     if (innovationVotedFor === innovation.name) {
-                        button.classList.add('chosen');
+                      button.classList.add('chosen');
                     }
                 } else {
                     button.setAttribute('type', 'submit');
-                    button.setAttribute('data-name', innovation.name);
-                    button.setAttribute('data-description', innovation.description);
-                    button.setAttribute('data-image', innovation.image);
+
                     button.setAttribute('formaction', `/innovations/${innovation.name.replace(/\s/g, '-')}`);
                 }
                 button.appendChild(span);
@@ -155,6 +179,13 @@ let innovationsManager = {
        votingForm.appendChild(frag);
        // to be able to chain a search for the buttons
        return  votingForm;
+    },
+
+    disableButtons: function () {
+      let buttons = document.getElementsByClassName('innov');
+      Array.prototype.forEach.call(buttons, (button, index) => {
+        button.classList.add('disabled');
+      });
     }
 
 };

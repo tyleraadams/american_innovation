@@ -21,7 +21,7 @@ app.use(compression());
 
 //Here we are configuring express to use body-parser as middle-ware.
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static('public', { maxAge: yearInMs }));
+app.use(express.static('public'/*, { maxAge: yearInMs }*/));
 // app.use(favicon(path.join(__dirname,'public','images','favicon.ico')));
 
 app.use(controllers);

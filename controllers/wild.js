@@ -11,7 +11,7 @@ var CurrentRound;
 
 router.post('/*', function(req, res) {
     var cookies = new Cookies( req, res, [process.env.COOKIE_KEY]);
-    var votedForInnovation = req.params[0].replace(/-/, ' ');
+    // var votedForInnovation = req.params[0].replace(/-/, ' ');
     // var round = CurrentRound._id;
 
 
@@ -21,14 +21,15 @@ router.post('/*', function(req, res) {
      req.connection.socket.remoteAddress;
 
 
-    if (!cookies.get('voted',  { signed: true })) {
+    if (!cookies.get('voted')) {
         // console.log(req);
         var input = req.body;
         input.ip = ip;
         var wild = new Wild(input);
-        cookies.set('voted', wild.name, { signed: true } );
+        cookies.set('voted', 'wild.name');
+        console.log(cookies.get('voted'))
         wild.save(function (err, vote) {
-            res.send('Thank you for voting, please check back ' /*+ CurrentRound.ending_date*/);
+          res.send('Thank you for voting, please check back ' /*+ CurrentRound.ending_date*/);
         });
     } else {
         res.send('Sorry, you already voted! Please check back ' /*+ CurrentRound.ending_date*/);
