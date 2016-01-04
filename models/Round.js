@@ -9,7 +9,7 @@ var RoundSchema = new mongoose.Schema({
 });
 
 
-RoundSchema.methods.findInnovationsForThisRound = function (cb) {
+RoundSchema.methods.findThisRound = function (cb) {
 
   // var startDate = new Date(2013, 1, 12)
   // , endDate   = new Date(2013, 1, 15)

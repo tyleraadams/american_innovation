@@ -12,7 +12,7 @@ router.get('/', function(req, res) {
   var cookies = new Cookies( req, res,  [process.env.COOKIE_KEY]);
   var round = new Round();
 
-  round.findInnovationsForThisRound(function (err, currentRound) {
+  round.findThisRound(function (err, currentRound) {
     console.log(currentRound);
     if (currentRound && currentRound[0] && currentRound[0].competitors) {
       CurrentRound = currentRound[0];
@@ -50,7 +50,7 @@ router.post('/*', function(req, res) {
      req.socket.remoteAddress ||
      req.connection.socket.remoteAddress;
 
-
+     console.log(currentRound._id);
     if (!cookies.get('voted')) {
         var vote = new Vote ({
             votedFor: votedForInnovation,

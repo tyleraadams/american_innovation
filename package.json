@@ -48,6 +48,7 @@
     "vex-js": "^2.3.3",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "1.1.0",
-    "watchify": "3.6.0"
+    "watchify": "3.6.0",
+    "bcrypt": "^0.8.5"
   }
 }
