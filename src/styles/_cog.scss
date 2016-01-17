@@ -9,12 +9,21 @@ body {
 }
 
 main {
-    overflow-y: hidden;
+    // margin-top: 100px;
+    overflow: hidden;
+
+    & > * {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
 }
+
 .cog-wrapper {
     position: relative;
     width:100%;
     color: $white;
+    text-align: center;
+    margin-top: 100px;
     // overflow-y:hidden;
     // width:588px;
     // height: 50%;
@@ -27,13 +36,15 @@ main {
     // top:0;
     // @include putOnCircle(9, 450px, 120px, false);
     // height: 552px;
-    width: 45%;
-    max-width: 1000px;
+    // width: 45%;
+    width: 100%;
+    max-width: 800px;
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
-    margin: 0 auto;
+    justify-content: center;
+    margin: 0 auto 0;
     align-content: space-around;
+
     // height: 330px;
 
     @include mobile {
@@ -43,29 +54,31 @@ main {
 
 .cog {
     fill: $blue;
+    opacity: 0.6;
     // stroke: $black;
     position: absolute;
     // stroke-width: 0.15px;
     // width: 100%;
      // height:120%;
-    width: 800px;
-    height:800px;
+    width: 1300px;
+    height:1300px;
     // margin-left: auto;
     // margin-right: auto;
     left: 50%;
     // right: 0;
-    top:80%;
+    top:90%;
     z-index:-1;
     // padding-bottom: 50%;
-    animation: barrelRoll 200s infinite linear;
+    animation: barrelRoll 400s infinite linear;
 
     &:nth-of-type(2) {
-        animation: reverseBarrelRoll 150s infinite linear;
-        left:50% ;
+        animation: reverseBarrelRoll 300s infinite linear;
+        left:80% ;
         top:100% ;
         fill: $red;
         width: 390px;
         height:390px;
+        // opacity: 0.6;
         // width: 30%;
         // height:0;
         // padding-bottom: 30%;
@@ -97,11 +110,12 @@ main {
     0% { transform: rotate(360deg); }
 }
 
+
 .innov {
-    // background: blue;
+    // background: $blue;
     // position: absolute;
     margin: 0;
-    background: rgba(255, 255, 255, 0.8);
+    background: transparent;
     margin: 1.5%;
     height: 100px;
     // width: 10%;
@@ -115,12 +129,13 @@ main {
     outline: none;
     position: relative;
     z-index:1;
+
     // width: 20%;
     // min-width: 150px;
     display: flex;
     justify-content: space-between;
     align-content: center;
-    border: 1px solid #cccccc;
+    border: 3px solid $white;
     flex: 1 0 30%;
     // opacity:0.70;
     //    -webkit-order: 0;
@@ -141,12 +156,17 @@ main {
     }
     span {
         // float: right;
-        font-size: .75em;
+        font-size: 1.33em;
         order:1;
         align-self: center;
         transition: color 50ms;
-        color: #131313;
+        // color: black;
         text-align: right;
+        font-weight: 400;
+        letter-spacing: 0.015em;
+        // text-transform: uppercase;
+        font-family: 'Alegreya Sans', sans-serif;
+        // color: #727272;
         // justify-self: space-around;
     }
 
@@ -168,16 +188,39 @@ p {
     text-align: center;
 }
 
+.cta {
+    margin-top: 30px;
+    color: $black;
+    // font-weight: 900;
+    // letter-spacing: 0.1em;
+    // font-size: 1.2em;
+
+}
+
 h1 {
     // background: $white;
     // z-index:1;
     // position:relative;
     text-align: center;
-    letter-spacing:0.025em;
-    text-transform: uppercase;
-    font-size:2.5em;
+    letter-spacing:0.05em;
+    // text-transform: uppercase;
+    font-size:3.5em;
     color: $white;
+    display: inline;
+    background: $red;
+    // font-style: italic;
+    line-height: 1.1;
+    // padding-top: 20px;
+    margin-bottom: 20px;
+    // padding-left: 10px;
+    // padding-right:10px;
+    span {
+        position: relative;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
     // background: $blue;
+
     // margin-top: 0;
     // after-top:200px;
     // &:after {
@@ -205,12 +248,13 @@ textarea {
 textarea {
     height: 100px;
 }
+
 .nomination {
-    background: rgba(255,255,255, 0.8);
-    width: 43%;
-    max-width: 990px;
+    // background: rgba(255,255,255, 0.8);
+    // width: 43%;
+    // max-width: 990px;
     // max-width: 900px;
-    border: 1px solid #cccccc;
+    // border: 3px solid $white;
     // background: $beige;
     z-index:1;
     position:relative;
@@ -218,6 +262,13 @@ textarea {
     text-align: center;
     margin:10px auto;
     padding-bottom:10px;
+    max-width: 770px;
+    color:$black;
+
+    h3 {
+        // background: $beige;
+        // display: inline;
+    }
     // padding-bottom: 10px;
     // &:before {
     //     content:'';
@@ -233,12 +284,13 @@ textarea {
 }
 
 .sponsored {
-    width: 47%;
-    margin: 0 auto;
+    // width: 47%;
 
+    margin: 0 auto;
+    max-width: 770px;
     p {
         font-size:0.9em;
-        color: white;
+        color: $black;
         text-align: center;
     }
 }
@@ -273,13 +325,14 @@ header {
     background: $red;
     color: $white;
     cursor: pointer;
+    border-color: $black;
     img {
 
         filter: invert(1);
     }
 
     span {
-        color: $white;
+        color: $black;
     }
 }
 
@@ -291,8 +344,24 @@ header {
     }
 }
 
-button {
-    background: black;
+.nomination button {
+    // @extend .innov;
+    // @extend .innov span;
+    background: transparent;
     color: white;
     border: 0;
+    padding: 10px 75px;
+    // text-transform: uppercase;
+    display: block;
+    margin: 0 auto;
+    border: 3px solid $white;
+     font-size: 1.33em;
+font-weight: 400;
+        letter-spacing: 0.015em;
+ font-family: 'Alegreya Sans', sans-serif;
+    &:hover {
+        background: $red;
+        border-color: $black;
+        color: $black;
+    }
 }
