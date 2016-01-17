@@ -4,6 +4,11 @@
     text-align: center;
     background: $white;
     border-radius: 0;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%, -50%);
+    margin-left: 0 !important;
+
     &:before {
         content: '';
         background: $blue;
