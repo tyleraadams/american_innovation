@@ -119,7 +119,7 @@ let innovationsManager = {
         let innovationVotedFor;
         let currentRound = serverResponse;
         serverResponse = JSON.parse(serverResponse);
-        let comeBackDate =  moment(JSON.parse(currentRound)['ending_date']).format('MMMM D');
+        let comeBackDate =  moment(JSON.parse(currentRound)['ending_date']).add('days', 1).format('MMMM D');
         let competitors = serverResponse.competitors;
         console.log(currentRound);
         alreadyVotedFlag = competitors[competitors.length - 1].hasOwnProperty('votedCookie');

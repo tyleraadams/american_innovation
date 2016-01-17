@@ -58,13 +58,19 @@ router.post('/*', function(req, res) {
             round: round,
             ip: ip
         });
-        cookies.set('voted', votedForInnovation);
+
+        var expiryDate = new Date(CurrentRound.ending_date);
+        var today = new Date();
+        var timeLeft = expiryDate - today;
+        // console.log('expiryDate: ', expiryDate, 'today: ', today, 'timeLeft: ', timeLeft);
+        // timeLeftInMilliSeconds = moment(timeLeft).milliseconds();
+        cookies.set('voted', votedForInnovation, {maxAge: timeLeft});
         vote.save(function (err, vote) {
-            res.send('Thank you for voting, please check back ' + moment(CurrentRound.ending_date).format('MMMM D'));
+            res.send('Thank you for voting, please check back ' + moment(JSON.parse(currentRound)['ending_date']).add('days', 1).format('MMMM D'));
         });
     } else {
 
-        res.send('Sorry, you already voted! Please check back ' + moment(CurrentRound.ending_date).format('MMMM D'));
+        res.send('Sorry, you already voted! Please check back ' + moment(JSON.parse(currentRound)['ending_date']).add('days', 1).format('MMMM D'));
     }
 
 });
