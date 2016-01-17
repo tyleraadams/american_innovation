@@ -41,37 +41,40 @@ router.get('/', function(req, res) {
 
 // Domestic animals page
 router.post('/*', function(req, res) {
+    var round = new Round();
     var cookies = new Cookies( req, res, [process.env.COOKIE_KEY]);
     var votedForInnovation = req.params[0].replace(/-/, ' ');
-    var round = CurrentRound._id;
+    // var round = CurrentRound._id;
+
+    round.findInnovationsForThisRound(function (err, currentRound) {
+
+      var ip = req.headers['x-forwarded-for'] ||
+       req.connection.remoteAddress ||
+       req.socket.remoteAddress ||
+       req.connection.socket.remoteAddress;
 
 
-    var ip = req.headers['x-forwarded-for'] ||
-     req.connection.remoteAddress ||
-     req.socket.remoteAddress ||
-     req.connection.socket.remoteAddress;
+      if (!cookies.get('voted')) {
+          var vote = new Vote ({
+              votedFor: votedForInnovation,
+              round: currentRound._id,
+              ip: ip
+          });
 
+          var expiryDate = new Date(currentRound.ending_date);
+          var today = new Date();
+          var timeLeft = expiryDate - today;
+          // console.log('expiryDate: ', expiryDate, 'today: ', today, 'timeLeft: ', timeLeft);
+          // timeLeftInMilliSeconds = moment(timeLeft).milliseconds();
+          cookies.set('voted', votedForInnovation, {maxAge: timeLeft});
+          vote.save(function (err, vote) {
+              res.send('Thank you for voting, please check back ' + moment(currentRound['ending_date']).add('days', 1).format('MMMM D'));
+          });
+      } else {
 
-    if (!cookies.get('voted')) {
-        var vote = new Vote ({
-            votedFor: votedForInnovation,
-            round: round,
-            ip: ip
-        });
-
-        var expiryDate = new Date(CurrentRound.ending_date);
-        var today = new Date();
-        var timeLeft = expiryDate - today;
-        // console.log('expiryDate: ', expiryDate, 'today: ', today, 'timeLeft: ', timeLeft);
-        // timeLeftInMilliSeconds = moment(timeLeft).milliseconds();
-        cookies.set('voted', votedForInnovation, {maxAge: timeLeft});
-        vote.save(function (err, vote) {
-            res.send('Thank you for voting, please check back ' + moment(JSON.parse(currentRound)['ending_date']).add('days', 1).format('MMMM D'));
-        });
-    } else {
-
-        res.send('Sorry, you already voted! Please check back ' + moment(JSON.parse(currentRound)['ending_date']).add('days', 1).format('MMMM D'));
-    }
+          res.send('Sorry, you already voted! Please check back ' + moment(currentRound['ending_date']).add('days', 1).format('MMMM D'));
+      }
+    });
 
 });
 

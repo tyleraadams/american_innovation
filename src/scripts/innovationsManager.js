@@ -21,7 +21,7 @@ let innovationsManager = {
           let modalYesHandler = (modal) => {
             // console.log('!! ', modal);
             votingManager.submitVote(action);
-
+            targetButton.classList.add('chosen');
             for (var i = 0; i < cogs.length; ++i) {
               cogs[i].classList.add('voted');
             }
@@ -186,6 +186,10 @@ let innovationsManager = {
       Array.prototype.forEach.call(buttons, (button, index) => {
         button.classList.add('disabled');
       });
+    },
+
+    applyChosenClass: function () {
+
     }
 
 };

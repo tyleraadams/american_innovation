@@ -20,8 +20,9 @@ let votingManager = {
 
     submitVote: function (path) {
         return this.post(path).then(function(response) {
-            // console.log("Success!", response);
+            console.log("Success!", path);
             messageManager.showMessage(response);
+
         }, function(error) {
             console.error("Failed!", error);
         });
