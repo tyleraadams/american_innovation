@@ -3,7 +3,8 @@ var express = require('express')
   , Innovation = require('../models/Innovation')
   , Vote = require('../models/Vote')
   , Round = require('../models/Round')
-  , Cookies = require('cookies');
+  , Cookies = require('cookies')
+  , moment = require('moment');
 
 // we should set this with a cookie on get /
 var CurrentRound;
@@ -59,10 +60,11 @@ router.post('/*', function(req, res) {
         });
         cookies.set('voted', votedForInnovation);
         vote.save(function (err, vote) {
-            res.send('Thank you for voting, please check back ' + CurrentRound.ending_date);
+            res.send('Thank you for voting, please check back ' + moment(CurrentRound.ending_date).format('MMMM D'));
         });
     } else {
-        res.send('Sorry, you already voted! Please check back ' + CurrentRound.ending_date);
+
+        res.send('Sorry, you already voted! Please check back ' + moment(CurrentRound.ending_date).format('MMMM D'));
     }
 
 });

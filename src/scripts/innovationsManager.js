@@ -3,7 +3,7 @@ import votingManager from './votingManager';
 import wildManager from './wildManager';
 import messageManager from './messageManager';
 import nanoModal from 'nanomodal';
-
+import moment from 'moment';
 let innovationsManager = {
     init: function () {
 
@@ -119,7 +119,7 @@ let innovationsManager = {
         let innovationVotedFor;
         let currentRound = serverResponse;
         serverResponse = JSON.parse(serverResponse);
-        let comeBackDate =  JSON.parse(currentRound)['ending_date'];
+        let comeBackDate =  moment(JSON.parse(currentRound)['ending_date']).format('MMMM D');
         let competitors = serverResponse.competitors;
         console.log(currentRound);
         alreadyVotedFlag = competitors[competitors.length - 1].hasOwnProperty('votedCookie');
