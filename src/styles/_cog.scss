@@ -71,6 +71,17 @@ main {
     // padding-bottom: 50%;
     animation: barrelRoll 400s infinite linear;
 
+    @include tablet {
+        width: 900px;
+        height: 900px;
+        top: 50%;
+    }
+
+    @include mobile {
+        width: 800px;
+        height: 800px;
+        top: 60%;
+    }
     &:nth-of-type(2) {
         animation: reverseBarrelRoll 300s infinite linear;
         left:80% ;
@@ -85,6 +96,8 @@ main {
         // width: 60%;
         // height:60%;
     }
+
+
 }
 
 .cog.voted {
@@ -175,12 +188,15 @@ main {
         flex: 1 0 47%;
 
         &:last-of-type {
-            width:50%;
+            max-width: 50%
         }
     }
 
     @include mobile {
-        flex: 1 0 47%;
+        flex: 1 0 100%;
+        &:last-of-type {
+            max-width: 100%
+        }
     }
 }
 
@@ -214,6 +230,17 @@ h1 {
     margin-bottom: 20px;
     // padding-left: 10px;
     // padding-right:10px;
+
+
+
+    @include tablet {
+        font-size:2.5em;
+    }
+
+    @include mobile {
+        font-size: 2.5em;
+    }
+
     span {
         position: relative;
         padding-left: 20px;
