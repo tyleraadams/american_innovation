@@ -51,13 +51,13 @@ let innovationsManager = {
                 // event.currentTarget.classList.add('chosen');
                 // cog.classList.add('voted');
 
-                // let currentChild = event.currentTarget.parentNode.firstElementChild;
-                // console.log(currentChild);
-                // currentChild.classList.add('disabled');
-                // while (currentChild.nextSibling) {
-                //     currentChild = currentChild.nextSibling;
-                //     currentChild.classList.add('disabled');
-                // };
+                let currentChild = event.currentTarget.parentNode.firstElementChild;
+                console.log(currentChild);
+                currentChild.classList.add('disabled');
+                while (currentChild.nextSibling) {
+                    currentChild = currentChild.nextSibling;
+                    currentChild.classList.add('disabled');
+                };
             // }
             // console.log(event.currentTarget);
             // console.log(event.target);
