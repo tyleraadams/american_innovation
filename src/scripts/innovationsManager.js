@@ -17,6 +17,8 @@ let innovationsManager = {
           let name = targetButton.getAttribute('data-name');
           let description = targetButton.getAttribute('data-description');
           let src = targetButton.getAttribute('data-image');
+          let width = targetButton.getAttribute('data-image-width');
+          let height = targetButton.getAttribute('data-image-height');
           let isDisabled = targetButton.classList.contains('disabled');
           let modalYesHandler = (modal) => {
             // console.log('!! ', modal);
@@ -44,7 +46,7 @@ let innovationsManager = {
                 // votingManager.submitVote(event.currentTarget.getAttribute('formaction'));
 
                 var buttons = [modalYesButton, {text: 'Cancel', handler:modalNoHandler}];
-                var justTextModal = nanoModal(`<h2>${name}</h2><img src=${src} alt=${name}><p>${description}</p><p>Would you like to vote for this innnovation?</p>`, {buttons: buttons});
+                var justTextModal = nanoModal(`<h2>${name}</h2><img src=${src} width=${width} height=${height} alt=\"${name}\"><p>${description}</p><p>Would you like to vote for this innnovation?</p>`, {buttons: buttons});
                 justTextModal.show();
                 // event.currentTarget.classList.add('chosen');
                 // cog.classList.add('voted');
@@ -140,7 +142,7 @@ let innovationsManager = {
                 let button = document.createElement('button');
                 let img = document.createElement('img');
                 let span = document.createElement('span');
-                img.src = innovation.thumb;
+                img.src = innovation.image.thumb;
                 img.alt = innovation.name;
 
                 button.classList.add('innov');
@@ -149,7 +151,9 @@ let innovationsManager = {
                 //
                 button.setAttribute('data-name', innovation.name);
                 button.setAttribute('data-description', innovation.description);
-                button.setAttribute('data-image', innovation.image);
+                button.setAttribute('data-image', innovation.image.src);
+                button.setAttribute('data-image-width', innovation.image.width);
+                button.setAttribute('data-image-height', innovation.image.height);
                 if (alreadyVotedFlag) {
                     button.classList.add('disabled');
 
