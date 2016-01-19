@@ -5,8 +5,7 @@ var express = require('express')
   , Round = require('../models/Round')
   , Cookies = require('cookies')
   , Wild = require('../models/Wild')
-  , moment = require('moment')
-  , formidable = require('formidable');
+  , moment = require('moment');
 
 // we should set this with a cookie on get / or use an ENV varaible
 var CurrentRound;
