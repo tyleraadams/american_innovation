@@ -123,7 +123,7 @@ let innovationsManager = {
         serverResponse = JSON.parse(serverResponse);
         let comeBackDate =  moment(JSON.parse(currentRound)['ending_date']).add('days', 1).format('MMMM D');
         let competitors = serverResponse.competitors;
-        console.log(currentRound);
+        // console.log(currentRound);
         alreadyVotedFlag = competitors[competitors.length - 1].hasOwnProperty('votedCookie');
          sessionStorage.setItem('currentRound', currentRound);
          wildManager.init();

@@ -14,17 +14,17 @@ router.get('/', function(req, res) {
   var round = new Round();
 
   round.findInnovationsForThisRound(function (err, currentRound) {
-    console.log(currentRound);
+    // console.log(currentRound);
     if (currentRound && currentRound[0] && currentRound[0].competitors) {
-      CurrentRound = currentRound[0];
-      var competitors = currentRound[0].competitors;
+      currentRound = currentRound[0];
+      var competitors = currentRound.competitors;
       Innovation.find( { name: {$in: competitors}  }, function (err, innovations) {
         if (err) console.error(err);
         if (cookies.get('voted')) {
           innovations.push({ votedCookie: cookies.get('voted') });
         }
-        CurrentRound.competitors = innovations;
-        res.send(CurrentRound);
+        currentRound.competitors = innovations;
+        res.send(currentRound);
       });
 
     }
@@ -47,7 +47,8 @@ router.post('/*', function(req, res) {
     // var round = CurrentRound._id;
 
     round.findInnovationsForThisRound(function (err, currentRound) {
-
+      console.log('this is the currentRound ', currentRound);
+      currentRound = currentRound[0];
       var ip = req.headers['x-forwarded-for'] ||
        req.connection.remoteAddress ||
        req.socket.remoteAddress ||
