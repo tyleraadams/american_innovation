@@ -30,7 +30,8 @@ let innovationsManager = {
             modal.hide();
           }
           let modalNoHandler = (modal) => {
-            modal.hide();
+            setTimeout( modal.hide(), 500);
+
           }
 
           let modalYesButton = {text: 'Yes'};

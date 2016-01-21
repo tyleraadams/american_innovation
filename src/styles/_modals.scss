@@ -10,6 +10,10 @@
     transform:translate(-50%, -50%);
     margin-left: 0 !important;
 
+    @include mobile {
+        width:75%;
+    }
+
     input, textarea  {
         outline: none;
         border: 3px solid $blue;
@@ -72,10 +76,6 @@
             border: 0;
         }
     }
-
-    @include mobile {
-        width: 100%;
-    }
 }
 
 label, h2 span {
@@ -118,3 +118,9 @@ label, h2 span {
 .wild {
     background: $white;
 }
+
+
+// .nanoModal.nanoModalOverride, .nanoModalOverlay.nanoModalOverride {
+//     opacity: 0;
+//     transition: opacity 0.5s ease;
+// }
