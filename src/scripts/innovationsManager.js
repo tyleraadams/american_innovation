@@ -29,11 +29,13 @@ let innovationsManager = {
             }
             modal.hide();
           }
+
           let modalNoHandler = (modal) => {
-            setTimeout( modal.hide(), 500);
-
+            let hide = () => {
+              modal.hide()
+            }
+            setTimeout( hide, 500);
           }
-
           let modalYesButton = {text: 'Yes'};
           // let modalYesButton = Object.assign({}, yesButton);
 
