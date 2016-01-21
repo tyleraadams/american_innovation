@@ -44,24 +44,27 @@ let innovationsManager = {
           }
             // if (!event.currentTarget.classList.contains('disabled')) {
                 // votingManager.submitVote(event.currentTarget.getAttribute('formaction'));
+          let buttons = [modalYesButton, {text: 'Cancel', handler:modalNoHandler}];
 
-                var buttons = [modalYesButton, {text: 'Cancel', handler:modalNoHandler}];
-                var justTextModal = nanoModal(`<h2>${name}</h2><img src=${src} width=${width} height=${height} alt=\"${name}\"><p>${description}</p><p>Would you like to vote for this innnovation?</p>`, {buttons: buttons});
-                justTextModal.show();
-                // event.currentTarget.classList.add('chosen');
-                // cog.classList.add('voted');
+          let options = {
+            buttons: buttons
+          }
 
-                let currentChild = event.currentTarget.parentNode.firstElementChild;
-                console.log(currentChild);
-                currentChild.classList.add('disabled');
-                while (currentChild.nextSibling) {
-                    currentChild = currentChild.nextSibling;
-                    currentChild.classList.add('disabled');
-                };
-            // }
-            // console.log(event.currentTarget);
-            // console.log(event.target);
-            // console.log(event.currentTarget.dataset.name);
+          if (window.innerWidth <= 700) {
+            options.overlayClose = false;
+          }
+
+          let justTextModal = nanoModal(`<h2><span>${name}</span></h2><img src=${src} width=${width} height=${height} alt=\"${name}\"><p>${description}</p><p>Would you like to vote for this innnovation?</p>`, options);
+          justTextModal.show();
+
+
+          let currentChild = event.currentTarget.parentNode.firstElementChild;
+          currentChild.classList.add('disabled');
+          while (currentChild.nextSibling) {
+              currentChild = currentChild.nextSibling;
+              currentChild.classList.add('disabled');
+          };
+
         };
 
 

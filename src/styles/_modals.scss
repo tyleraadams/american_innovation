@@ -1,6 +1,7 @@
 .nanoModal.nanoModalOverride {
     position: fixed;
-    width: 600px;
+    max-width: 600px;
+    width: 90%;
     text-align: left;
     background: $white;
     border-radius: 0;
@@ -77,9 +78,9 @@
     }
 }
 
-label {
+label, h2 span {
     margin: 10px 0 5px;
-    font-size: 1.5em;
+    font-size: 1.25em;
     background: $red;
     color: $white;
     display: inline !important;
@@ -93,17 +94,17 @@ label {
     background: transparent;
     z-index:2;
     position: relative;
+    font-size: .85em;
 }
 .nanoModalButtons {
     z-index: 2;
     position:relative;
     border-top: 0;
-
 }
 
 .nanoModalBtn {
     border: 3px solid $blue;
-    font-size: 1.33em;
+    font-size: 1em;
     font-weight: 400;
     letter-spacing: 0.015em;
     font-family: 'Alegreya Sans', sans-serif;

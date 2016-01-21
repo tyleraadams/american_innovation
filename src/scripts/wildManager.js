@@ -53,8 +53,20 @@ let wildManager = {
     if (hasAlreadyVoted) {
       openModalButton.classList.add('disabled');
     }
+    let buttons = [  yesButton, cancelButton ];
+
+    let options = {
+      buttons: buttons,
+      classes: 'wild'
+    }
+
+    if (window.innerWidth <= 700) {
+      options.overlayClose = false;
+    }
+
+
     var modalObj = nanoModal(document.getElementsByClassName('wild-card')[0],
-                  { buttons: [  yesButton, cancelButton ], classes: 'wild'});
+                  options );
 
     openModalButton.addEventListener('click', function (event) {
       if (!hasAlreadyVoted) {
