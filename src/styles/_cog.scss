@@ -338,8 +338,11 @@ header {
     // top: 50%;
     // left:50%;
     border-bottom: 8px solid $white;
-    border-left: 8px solid $white;
-    border-right: 8px solid $white;
+    @include large {
+
+        border-left: 8px solid $white;
+        border-right: 8px solid $white;
+    }
     // height: 100%;
 }
 .chosen {
