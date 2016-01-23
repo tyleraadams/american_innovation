@@ -2,21 +2,6 @@ import messageManager from './messageManager';
 
 
 let votingManager = {
-    init: () => {
-
-        // let buttons = document.getElementsByClassName('innov-icon');
-
-        // let clickHandler = (event) => {
-        //     console.log(event.currentTarget);
-        //     console.log(event.target);
-        //     console.log(event.currentTarget.dataset.name);
-        // };
-
-        // Array.prototype.forEach.call(buttons, (button, index) => {
-        //     button.addEventListener('click', clickHandler);
-        // });
-
-    },
 
     submitVote: function (path) {
         return this.post(path).then(function(response) {
