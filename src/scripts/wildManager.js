@@ -4,6 +4,8 @@ import innovationsManager from './innovationsManager';
 import messageManager from './messageManager';
 import validate from 'validate-js';
 import moment from 'moment';
+import utils from './utils';
+
 let wildManager = {
   init: function () {
 
@@ -39,7 +41,7 @@ let wildManager = {
           sessionStorage.setItem('innovationVotedFor', 'nomination');
           hasAlreadyVoted = true;
           innovationsManager.disableButtons();
-          modal.hide();
+          utils.delayHide(modal);
           messageManager.showMessage(`Thank you for submiting a nomination. Please check back ${comeBackDate} to see if we chose your submission.`);
         } else {
           let container = parentEl.getElementsByClassName('wild-messages')[0];
@@ -50,7 +52,7 @@ let wildManager = {
     let cancelButton  = {
       text: 'Cancel',
       handler: function(modal) {
-        modal.hide();
+        utils.delayHide(modal);
       }
     };
 
