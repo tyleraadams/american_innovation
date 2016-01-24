@@ -29,22 +29,12 @@ router.get('/', function(req, res) {
 
     }
   });
-  // Innovation.find(function (err, innovations) {
-  //   if (err) return console.error(err);
-  //       if (cookies.get('voted'), {signed: true}) {
-  //           innovations.push({ votedCookie: cookies.get('voted', {signed: true}) });
-  //       }
-
-  //       res.send(innovations);
-  //   });
 });
 
-// Domestic animals page
 router.post('/*', function(req, res) {
     var round = new Round();
     var cookies = new Cookies( req, res, [process.env.COOKIE_KEY]);
     var votedForInnovation = req.params[0].replace(/-/, ' ');
-    // var round = CurrentRound._id;
 
     round.findInnovationsForThisRound(function (err, currentRound) {
       console.log('this is the currentRound ', currentRound);
@@ -65,8 +55,6 @@ router.post('/*', function(req, res) {
           var expiryDate = new Date(currentRound.ending_date);
           var today = new Date();
           var timeLeft = expiryDate - today;
-          // console.log('expiryDate: ', expiryDate, 'today: ', today, 'timeLeft: ', timeLeft);
-          // timeLeftInMilliSeconds = moment(timeLeft).milliseconds();
           cookies.set('voted', votedForInnovation, {maxAge: timeLeft});
           vote.save(function (err, vote) {
               res.send('Thank you for voting, please check back ' + moment(currentRound['ending_date']).add('days', 1).format('MMMM D'));
@@ -78,10 +66,5 @@ router.post('/*', function(req, res) {
     });
 
 });
-
-// Wild animals page
-// router.get('/wild', function(req, res) {
-//   res.send('Wolf, Fox, Eagle');
-// })
 
 module.exports = router;

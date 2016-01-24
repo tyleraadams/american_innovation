@@ -3,8 +3,8 @@ module.exports = {
     {
       name: 'Round 1',
       competitors: ['GPS','Hearing Aid','Mobile Phone','Sewing Machine','Kevlar','Electric Guitar','Air Conditioner','3D Printer','Robotic Arm'],
-      starting_date: new Date("2015-01-24T00:00:00Z"),
-      ending_date: new Date("2016-02-07T00:00:00-05:00")
+      starting_date: new Date("2016-01-24T00:00:00-05:00"),
+      ending_date: new Date("2016-02-07T23:59:59-05:00")
     }
   ],
   innovations: [
