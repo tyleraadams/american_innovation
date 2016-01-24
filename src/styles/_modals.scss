@@ -1,12 +1,41 @@
 .nanoModal.nanoModalOverride {
     position: fixed;
-    width: 600px;
-    text-align: center;
+    max-width: 600px;
+    width: 90%;
+    text-align: left;
     background: $white;
     border-radius: 0;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%, -50%);
+    margin-left: 0 !important;
+
+    @include mobile {
+        width:80%;
+        font-size:0.95em;
+
+        img {
+            width: 45%;
+            height: auto;
+        }
+    }
+
+    input, textarea  {
+        outline: none;
+        border: 3px solid $blue;
+        background: $white;
+        color: $black;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        font-size: 1em;
+        font-weight: 400;
+        letter-spacing: 0.015em;
+        font-family: 'Alegreya Sans', sans-serif;
+    }
+
     &:before {
         content: '';
-        background: $blue;
+        background: $white;
         height: 50%;
         width:100%;
         transform: skewY(4deg);
@@ -14,6 +43,13 @@
         top:-30px;
         left:0;
         z-index:1;
+    }
+
+    &:not(.wild) {
+        text-align: center;
+        &:before {
+             background: $blue;
+        }
     }
     &:after {
         content: '';
@@ -29,10 +65,10 @@
     &.wild {
         background: $white;
         &:before {
-            background: $red;
+            background: $white;
         }
         &:after {
-            background: $blue;
+            background: $white;
         }
     }
 
@@ -46,29 +82,52 @@
             border: 0;
         }
     }
-
-    @include mobile {
-        width: 100%;
-    }
 }
 
-label{ text-align: left; margin: 10px 0 5px; font-size: 1.25em;}
-
-input, textarea  {
-    outline: none;
-    border: 1px solid #eee;
-
+label, h2 span {
+    margin: 10px 0 5px;
+    font-size: 1.25em;
+    background: $red;
+    color: $white;
+    display: inline !important;
+   // font-family: 'Alegreya Sans', sans-serif;
+   font-weight: 800;
+   padding: 0 3px;
 }
+
+
 .nanoModalContent {
     background: transparent;
     z-index:2;
     position: relative;
+    font-size: .85em;
 }
 .nanoModalButtons {
     z-index: 2;
     position:relative;
+    border-top: 0;
+}
+
+.nanoModalBtn {
+    border: 3px solid $blue;
+    border-radius: 0;
+    font-size: 1em;
+    font-weight: 400;
+    letter-spacing: 0.015em;
+    font-family: 'Alegreya Sans', sans-serif;
+     &:hover {
+        background: $red;
+        border-color: $black;
+        color: $white;
+    }
 }
 
 .wild {
-    background: $red;
+    background: $white;
 }
+
+
+// .nanoModal.nanoModalOverride, .nanoModalOverlay.nanoModalOverride {
+//     opacity: 0;
+//     transition: opacity 0.5s ease;
+// }

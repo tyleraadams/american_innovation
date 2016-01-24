@@ -3,7 +3,8 @@ var express = require('express')
   , Innovation = require('../models/Innovation')
   , Vote = require('../models/Vote')
   , Round = require('../models/Round')
-  , Cookies = require('cookies');
+  , Cookies = require('cookies')
+  , moment = require('moment');
 
 // we should set this with a cookie on get /
 var CurrentRound;
@@ -12,64 +13,57 @@ router.get('/', function(req, res) {
   var cookies = new Cookies( req, res,  [process.env.COOKIE_KEY]);
   var round = new Round();
 
-  round.findThisRound(function (err, currentRound) {
-    console.log(currentRound);
+
+  round.findInnovationsForThisRound(function (err, currentRound) {
+
     if (currentRound && currentRound[0] && currentRound[0].competitors) {
-      CurrentRound = currentRound[0];
-      var competitors = currentRound[0].competitors;
+      currentRound = currentRound[0];
+      var competitors = currentRound.competitors;
       Innovation.find( { name: {$in: competitors}  }, function (err, innovations) {
         if (err) console.error(err);
         if (cookies.get('voted')) {
           innovations.push({ votedCookie: cookies.get('voted') });
         }
-        CurrentRound.competitors = innovations;
-        res.send(CurrentRound);
+        currentRound.competitors = innovations;
+        res.send(currentRound);
       });
 
     }
   });
-  // Innovation.find(function (err, innovations) {
-  //   if (err) return console.error(err);
-  //       if (cookies.get('voted'), {signed: true}) {
-  //           innovations.push({ votedCookie: cookies.get('voted', {signed: true}) });
-  //       }
-
-  //       res.send(innovations);
-  //   });
 });
 
-// Domestic animals page
 router.post('/*', function(req, res) {
+    var round = new Round();
     var cookies = new Cookies( req, res, [process.env.COOKIE_KEY]);
     var votedForInnovation = req.params[0].replace(/-/, ' ');
-    var round = CurrentRound._id;
 
+    round.findInnovationsForThisRound(function (err, currentRound) {
+      console.log('this is the currentRound ', currentRound);
+      currentRound = currentRound[0];
+      var ip = req.headers['x-forwarded-for'] ||
+       req.connection.remoteAddress ||
+       req.socket.remoteAddress ||
+       req.connection.socket.remoteAddress;
 
-    var ip = req.headers['x-forwarded-for'] ||
-     req.connection.remoteAddress ||
-     req.socket.remoteAddress ||
-     req.connection.socket.remoteAddress;
+      if (!cookies.get('voted')) {
+          var vote = new Vote ({
+              votedFor: votedForInnovation,
+              round: currentRound.name,
+              ip: ip
+          });
 
-     console.log(currentRound._id);
-    if (!cookies.get('voted')) {
-        var vote = new Vote ({
-            votedFor: votedForInnovation,
-            round: round,
-            ip: ip
-        });
-        cookies.set('voted', votedForInnovation);
-        vote.save(function (err, vote) {
-            res.send('Thank you for voting, please check back ' + CurrentRound.ending_date);
-        });
-    } else {
-        res.send('Sorry, you already voted! Please check back ' + CurrentRound.ending_date);
-    }
+          var expiryDate = new Date(currentRound.ending_date);
+          var today = new Date();
+          var timeLeft = expiryDate - today;
+          cookies.set('voted', votedForInnovation, {maxAge: timeLeft});
+          vote.save(function (err, vote) {
+              res.send('Thank you for voting, please check back ' + moment(currentRound['ending_date']).add('days', 1).format('MMMM D'));
+          });
+      } else {
+          res.send('Sorry, you already voted! Please check back ' + moment(currentRound['ending_date']).add('days', 1).format('MMMM D'));
+      }
+    });
 
 });
-
-// Wild animals page
-// router.get('/wild', function(req, res) {
-//   res.send('Wolf, Fox, Eagle');
-// })
 
 module.exports = router;

@@ -3,13 +3,21 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    Tyler Adams -- Developer and Designer -- @tyleraadams
+    T.J. Raphael -- Digital Editor, The Takeaway -- @TJRaphael
+    Cameron Drews -- Producer, The Takeaway
+    Anita Rundles -- Artist
 
 # THANKS
 
-    <name>
+    ASME, the American Society Mechanical Engineers
+    Lemelson Foundation
+    The Takeaway
+    WNYC, New York Public Radio
+    PRI, Public Radio International
 
 # TECHNOLOGY COLOPHON
 
     CSS3, HTML5
-    Apache Server Configs, jQuery, Modernizr, Normalize.css
+    Nginx Server Configs, jQuery, Modernizr, Normalize.css, HTML5 Boilerplate
+    Require.js, ES2015, Babel, Gulp, Node, Express, MongoDB

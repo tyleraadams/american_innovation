@@ -1,6 +1,25 @@
 .messages {
-    font-size:1.5em;
-    color: $red;
+    font-size:1.25em;
+    color: $white;
+    max-width: 770px;
     text-transform: uppercase;
-    font-weight: bold;
+    font-weight: 800;
+    margin: 0 auto 20px;
+    // display: inline;
+    p {
+        display: inline;
+        background: $red;
+        padding:3px;
+        letter-spacing: 0.02em;
+    }
+}
+
+
+.wild-messages {
+    color: $red;
+    font-size: 1.2em;
+
+    p {
+        margin: 0;
+    }
 }
