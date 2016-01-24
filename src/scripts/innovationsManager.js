@@ -76,17 +76,16 @@ let innovationsManager = {
       let competitors = serverResponse.competitors;
       // console.log(currentRound);
       alreadyVotedFlag = competitors[competitors.length - 1].hasOwnProperty('votedCookie');
-       sessionStorage.setItem('currentRound', currentRound);
-       wildManager.init();
+      sessionStorage.setItem('currentRound', currentRound);
+      wildManager.init();
       if (alreadyVotedFlag) {
           innovationVotedFor = competitors.pop().votedCookie;
           sessionStorage.setItem('innovationVotedFor', innovationVotedFor);
-          messageManager.showMessage(`You have already voted. Please check back ${comeBackDate}`)
+          messageManager.showMessage(`You have already voted. Please check back ${comeBackDate}`);
       }
       innovations = competitors;
       innovations.forEach(function(innovation, index) {
         if (innovation.hasOwnProperty('name')) {
-            console.log('innovationVotedFor: ', innovationVotedFor);
             let button = document.createElement('button');
             let img = document.createElement('img');
             let span = document.createElement('span');
@@ -122,7 +121,6 @@ let innovationsManager = {
     },
 
     insertButtonsIntoDom: function (innovations) {
-      console.log('these are the innovations inside insertbuttonsintodom: ', innovations);
        let frag = this.buildInnovations(innovations);
        let votingForm = document.getElementsByClassName('voting-form')[0];
        votingForm.appendChild(frag);
@@ -131,14 +129,10 @@ let innovationsManager = {
     },
 
     disableButtons: function () {
-      let buttons = document.getElementsByClassName('innov');
+      let buttons = document.querySelectorAll('.innov, .nominate');;
       Array.prototype.forEach.call(buttons, (button, index) => {
         button.classList.add('disabled');
       });
-    },
-
-    applyChosenClass: function () {
-
     }
 
 };

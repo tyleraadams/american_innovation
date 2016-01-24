@@ -260,4 +260,21 @@ header {
         border-color: $black;
         color: $black;
     }
+
+    &.disabled {
+        background:#ccc;
+        border: none;
+        outline: none;
+        &:hover {
+            color: $white;
+        }
+
+        &.chosen {
+            background: $red;
+            border: 3px solid $black;
+            color: $black;
+        }
+    }
+
+
 }

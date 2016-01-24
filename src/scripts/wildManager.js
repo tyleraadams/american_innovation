@@ -43,6 +43,8 @@ let wildManager = {
           innovationsManager.disableButtons();
           utils.delayHide(modal);
           messageManager.showMessage(`Thank you for submiting a nomination. Please check back ${comeBackDate} to see if we chose your submission.`);
+          openModalButton.classList.add('disabled');
+          openModalButton.classList.add('chosen');
         } else {
           let container = parentEl.getElementsByClassName('wild-messages')[0];
           messageManager.showMessages(container, validationMessages);
@@ -57,9 +59,13 @@ let wildManager = {
     };
 
     let hasAlreadyVoted = sessionStorage.getItem('innovationVotedFor');
-    if (hasAlreadyVoted) {
+    if (hasAlreadyVoted === 'wild') {
       openModalButton.classList.add('disabled');
-    }
+      openModalButton.classList.add('chosen');
+    } else if (hasAlreadyVoted) {
+      openModalButton.classList.add('disabled');
+    };
+
     let buttons = [ yesButton, cancelButton ];
 
     let options = {

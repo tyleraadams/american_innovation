@@ -1,5 +1,6 @@
 import nanoModal from 'nanomodal';
 import votingManager from './votingManager';
+import innovationsManager from './innovationsManager';
 import utils from './utils';
 // CANCEL BUTTONS ISN'T WORKING
 const modalManager = {};
@@ -18,6 +19,7 @@ modalManager.modalYesHandler = function (action) {
   return function (modal) {
     votingManager.submitVote(action);
     utils.delayHide(modal);
+    innovationsManager.disableButtons();
   };
     // targetButton.classList.add('chosen');
     // for (var i = 0; i < cogs.length; ++i) {
@@ -66,8 +68,8 @@ modalManager.innovClickHandler = function (event)  {
    // console.log('this inside of build innovClickHandler ', this);
   event.preventDefault();
   let data = {};
-
   let targetButton = event.currentTarget;
+  targetButton.classList.add('chosen');
   data.action = targetButton.getAttribute('formaction');
   data.name = targetButton.getAttribute('data-name');
   data.description = targetButton.getAttribute('data-description');
