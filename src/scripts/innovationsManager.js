@@ -77,12 +77,12 @@ let innovationsManager = {
       // console.log(currentRound);
       alreadyVotedFlag = competitors[competitors.length - 1].hasOwnProperty('votedCookie');
       sessionStorage.setItem('currentRound', currentRound);
-      wildManager.init();
       if (alreadyVotedFlag) {
           innovationVotedFor = competitors.pop().votedCookie;
           sessionStorage.setItem('innovationVotedFor', innovationVotedFor);
           messageManager.showMessage(`You have already voted. Please check back ${comeBackDate}`);
       }
+      wildManager.init();
       innovations = competitors;
       innovations.forEach(function(innovation, index) {
         if (innovation.hasOwnProperty('name')) {

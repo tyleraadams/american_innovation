@@ -15,8 +15,9 @@ modalManager.modalNoButton = {
 };
 
 
-modalManager.modalYesHandler = function (action) {
+modalManager.modalYesHandler = function (action, targetButton) {
   return function (modal) {
+    targetButton.classList.add('chosen');
     votingManager.submitVote(action);
     utils.delayHide(modal);
     innovationsManager.disableButtons();
@@ -36,13 +37,13 @@ modalManager.modalNoHandler = function (modal) {
   utils.delayHide(modal);
 };
 
-modalManager.buildButtons = function (isDisabled, action) {
+modalManager.buildButtons = function (isDisabled, action, targetButton) {
   console.log( 'this inside ofbuild buttosn');
 
   if (isDisabled) {
     this.modalYesButton.classes = 'disabled';
   } else {
-    this.modalYesButton.handler = this.modalYesHandler(action);
+    this.modalYesButton.handler = this.modalYesHandler(action, targetButton);
   }
 
   this.modalNoButton.handler = this.modalNoHandler;
@@ -69,7 +70,6 @@ modalManager.innovClickHandler = function (event)  {
   event.preventDefault();
   let data = {};
   let targetButton = event.currentTarget;
-  targetButton.classList.add('chosen');
   data.action = targetButton.getAttribute('formaction');
   data.name = targetButton.getAttribute('data-name');
   data.description = targetButton.getAttribute('data-description');
@@ -78,7 +78,7 @@ modalManager.innovClickHandler = function (event)  {
   data.height = targetButton.getAttribute('data-image-height');
   data.isDisabled = targetButton.classList.contains('disabled');
 
-  let options = { buttons: this.buildButtons(data.isDisabled, data.action)};
+  let options = { buttons: this.buildButtons(data.isDisabled, data.action, targetButton)};
 
 
   if (window.innerWidth <= 700) {
