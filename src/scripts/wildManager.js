@@ -8,14 +8,14 @@ let wildManager = {
   init: function () {
 
     let openModalButton = document.getElementsByClassName('nominate')[0];
-    // console.log('!!!: ', JSON.parse(sessionStorage.getItem('currentRound')))
     let comeBackDate = moment(JSON.parse(sessionStorage.getItem('currentRound'))['ending_date']).add('days', 1).format('MMMM D');
 
     let yesButton  = {
       text: 'Submit',
-      handler: function(modal) {
-
-        let form = event.target.parentElement.parentElement.querySelector('form');
+    };
+    yesButton.handler = function (modal) {
+        let parentEl = event.target.parentElement.parentElement;
+        let form = parentEl.querySelector('form');
         let name = form.querySelector('[name=name]').value;
         let phone = form.querySelector('[name=phone]').value;
         let innovation = form.querySelector('[name=innovation]').value;
@@ -28,19 +28,24 @@ let wildManager = {
           "innovation": innovation,
           "description": description,
           "email": email
-        }
-        form = JSON.stringify(form);
-// <form name=​"wild-card" class=​"wild-card" method=​"POST" action=​"/​wild">​…​</form>​
+        };
 
-        votingManager.submitNomination('/wild', form);
-        // form.submit();
-        sessionStorage.setItem('innovationVotedFor', 'nomination');
-        hasAlreadyVoted = true;
-        innovationsManager.disableButtons();
-        modal.hide();
-        messageManager.showMessage(`Thank you for submiting a nomination. Please check back ${comeBackDate} to see if we chose your submission.`);
-      }
-    };
+        let validationMessages = this.validateForm(form);
+        let isAllValid = this.isAllValid(validationMessages);
+        // debugger;
+        if (isAllValid) {
+          form = JSON.stringify(form);
+          votingManager.submitNomination('/wild', form);
+          sessionStorage.setItem('innovationVotedFor', 'nomination');
+          hasAlreadyVoted = true;
+          innovationsManager.disableButtons();
+          modal.hide();
+          messageManager.showMessage(`Thank you for submiting a nomination. Please check back ${comeBackDate} to see if we chose your submission.`);
+        } else {
+          let container = parentEl.getElementsByClassName('wild-messages')[0];
+          messageManager.showMessages(container, validationMessages);
+        }
+    }.bind(this);
 
     let cancelButton  = {
       text: 'Cancel',
@@ -53,7 +58,7 @@ let wildManager = {
     if (hasAlreadyVoted) {
       openModalButton.classList.add('disabled');
     }
-    let buttons = [  yesButton, cancelButton ];
+    let buttons = [ yesButton, cancelButton ];
 
     let options = {
       buttons: buttons,
@@ -72,29 +77,44 @@ let wildManager = {
       if (!hasAlreadyVoted) {
         modalObj.show();
       }
-    //   var validator = new FormValidator('wild-card', [{
-    //   name: 'name',
-    //   display: 'required',
-    //   rules: 'required|alpha'
-    // }, {
-    //     name: 'email',
-    //     rules: 'required|valid_email'
-    // }, {
-    //     name: 'phone',
-    //     rules: 'required|exact_length(10)|numeric'
-    // }, {
-    //     name: 'innov',
-    //     display: 'password confirmation',
-    //     rules: 'required|alpha_numeric'
-    // }, {
-    //     name: 'description',
-    //     rules: 'required|alpha_numeric'
-    // }], function(errors, event) {
-    //     if (errors.length > 0) {
-    //       console.log(errors);
-    //         // Show the errors
-    //     }
     });
+  },
+
+  validateForm: function (form) {
+
+    let messages = Object.assign({}, form);
+
+    for (var field in form) {
+      // put all validations here
+      // name should be all letters
+      // phone should be 10 digits
+      // email should be valid email with @ and .com, and at least one char in between each
+      // check for empty after trim
+      form[field] = form[field].trim();
+      if (form[field] === '') {
+        messages[field] = `${field.toUpperCase()} is a required field`;
+      } else if (field === 'name' && !/^[A-Za-z\s]+$/.test(form[field])) {
+        messages[field] = `${field.toUpperCase()} should be letter and spaces only`
+      } else if (field === 'phone' && !/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im.test(form[field])) {
+        messages[field] = `${field.toUpperCase()} must be a valid phone number`
+      } else if (field === 'email' && !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(form[field])) {
+        messages[field] = `${field.toUpperCase()} must be a valid email`
+      } else {
+        delete messages[field];
+      }
+    }
+
+    return messages;
+  },
+
+  isAllValid: function (messages) {
+    let hasAnyProps = true;
+    for (var key in messages) {
+      hasAnyProps = false;
+      break;
+    }
+
+    return hasAnyProps;
   }
 
 };
