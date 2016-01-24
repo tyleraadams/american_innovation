@@ -1,7 +1,7 @@
-
 $tablet-width: 768px;
 $desktop-width: 1024px;
 $large-width: 1280px;
+
 @mixin mobile {
   @media (max-width: #{$tablet-width - 1px}) {
     @content;
@@ -24,81 +24,4 @@ $large-width: 1280px;
     @media (min-width: #{$large-width}) {
         @content;
     }
-}
-
-@mixin putOnCircle($nb-items, $circle-size, $item-size, $class-for-IE: false) {
-  $half-item:     $item-size / 2;
-  $half-parent: $circle-size / 2;
-
-  position: relative;               /* [1] */
-  width:  $circle-size;
-  height: $circle-size;
-  padding: 0;
-  border-radius: 50%;
-  list-style: none;                 /* [2] */
-  @include box-sizing(content-box); /* [3] */
-
-  > * {                             /* [4] */
-    display: block;
-    position: absolute;
-    top:  50%;
-    left: 50%;
-    width:  $item-size;
-    height: $item-size;
-    margin: -$half-item;
-
-    $angle: 360 / $nb-items;
-    $rot: 0;
-    @for $i from 1 to $nb-items+1 {
-
-      // If no support for IE8-
-
-      @if $class-for-IE == false {
-        &:nth-of-type(#{$i}) {
-          @include transform(rotate(#{$rot}deg) translate($half-parent) rotate(-#{$rot}deg));
-        }
-      }
-
-      // If support for IE8-
-
-      @else {
-        &.#{$class-for-IE}#{$i} {
-          // If CSS transforms are not supported
-          $mt: sin($rot * pi() / 180) * $half-parent - $half-item;
-          $ml: cos($rot * pi() / 180) * $half-parent - $half-item;
-          margin: $mt 0 0 $ml;
-        }
-      }
-      $rot: $rot + $angle;
-    }
-  }
-}
-
-
-
-@mixin transform($transforms) {
-       -moz-transform: $transforms;
-         -o-transform: $transforms;
-        -ms-transform: $transforms;
-    -webkit-transform: $transforms;
-          transform: $transforms;
-}
-// rotate
-@mixin rotate ($deg) {
-  @include transform(rotate(#{$deg}deg));
-}
-
-// scale
-@mixin scale($scale) {
-     @include transform(scale($scale));
-}
-// translate
-@mixin translate ($x, $y) {
-   @include transform(translate($x, $y));
-}
-
-@mixin box-sizing($box-model) {
-  -webkit-box-sizing: $box-model; // Safari <= 5
-     -moz-box-sizing: $box-model; // Firefox <= 19
-          box-sizing: $box-model;
 }
