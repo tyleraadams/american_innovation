@@ -11,8 +11,13 @@
     margin-left: 0 !important;
 
     @include mobile {
-        width:90%;
+        width:80%;
         font-size:0.95em;
+
+        img {
+            width: 45%;
+            height: auto;
+        }
     }
 
     input, textarea  {

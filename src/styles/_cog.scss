@@ -78,7 +78,7 @@ main {
     }
 
     @include mobile {
-        width: 800px;
+        width: 100%;
         height: 800px;
         top: 60%;
     }
@@ -238,7 +238,7 @@ h1 {
     }
 
     @include mobile {
-        font-size: 2.5em;
+        font-size: 2em;
     }
 
     span {

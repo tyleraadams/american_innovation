@@ -8,7 +8,7 @@ router.use('/innovations', innovations);
 router.use('/wild', wild);
 
 router.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname+'/public/index.html'), { maxAge: yearInMs });
+  res.sendFile(path.join(__dirname+'/public/index.html'));
 });
 
 // router.get('/about', function(req, res) {
