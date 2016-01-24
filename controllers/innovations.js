@@ -58,7 +58,7 @@ router.post('/*', function(req, res) {
       if (!cookies.get('voted')) {
           var vote = new Vote ({
               votedFor: votedForInnovation,
-              round: currentRound._id,
+              round: currentRound.name,
               ip: ip
           });
 
