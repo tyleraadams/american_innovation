@@ -2,7 +2,7 @@ import _ from 'lodash';
 import votingManager from './votingManager';
 import wildManager from './wildManager';
 import messageManager from './messageManager';
-import $ from 'jquery';
+
 import moment from 'moment';
 import utils from './utils';
 import modalManager from './modalManager';
@@ -21,7 +21,6 @@ let innovationsManager = {
   //     currentChild = currentChild.nextSibling;
   //     currentChild.classList.add('disabled');
   // };
-      if (_.isUndefined(Promise)) {
         this.get('/innovations').then(function(response) {
           let innovations = response;
           let buttons = that.insertButtonsIntoDom(innovations).getElementsByClassName('innov');
@@ -32,16 +31,6 @@ let innovationsManager = {
           }, function(error) {
               console.error("Failed!", error);
         });
-
-      } else {
-        $.get('/innovations', function (response) {
-          let innovations = response;
-          let buttons = that.insertButtonsIntoDom(innovations).getElementsByClassName('innov');
-          Array.prototype.forEach.call(buttons, (button, index) => {
-            button.addEventListener('click', modalManager.innovClickHandler.bind(modalManager));
-          });
-        });
-      }
     },
     // http://www.html5rocks.com/en/tutorials/es6/promises/
     get: function (url) {
@@ -107,7 +96,7 @@ let innovationsManager = {
             span.innerText = innovation.name;
             span.textContent = innovation.name;
             // button.setAttribute('method', 'POST');
-
+            // debugger;
             button.setAttribute('data-name', innovation.name);
             button.setAttribute('data-description', innovation.description);
             button.setAttribute('data-image', innovation.image.src);
