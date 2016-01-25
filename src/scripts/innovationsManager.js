@@ -94,8 +94,9 @@ let innovationsManager = {
 
             button.classList.add('innov');
             span.innerText = innovation.name;
+            span.textContent = innovation.name;
             // button.setAttribute('method', 'POST');
-            //
+
             button.setAttribute('data-name', innovation.name);
             button.setAttribute('data-description', innovation.description);
             button.setAttribute('data-image', innovation.image.src);
