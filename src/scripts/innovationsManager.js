@@ -91,14 +91,13 @@ let innovationsManager = {
             let span = document.createElement('span');
             img.src = innovation.image.thumb;
             img.alt = innovation.name;
-
             button.classList.add('innov');
             span.innerText = innovation.name;
             span.textContent = innovation.name;
-            // button.setAttribute('method', 'POST');
-            // debugger;
+
             button.setAttribute('data-name', innovation.name);
             button.setAttribute('data-description', innovation.description);
+            button.setAttribute('data-audio', innovation.audio);
             button.setAttribute('data-image', innovation.image.src);
             button.setAttribute('data-image-width', innovation.image.width);
             button.setAttribute('data-image-height', innovation.image.height);

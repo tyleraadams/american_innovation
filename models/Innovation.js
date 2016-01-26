@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var InnovationSchema = new mongoose.Schema({
   name: String,
-  votes: Array,
+  audio: String,
   description: String,
   eliminated: Boolean,
   image: {
