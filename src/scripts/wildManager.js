@@ -34,7 +34,6 @@ let wildManager = {
 
         let validationMessages = this.validateForm(form);
         let isAllValid = this.isAllValid(validationMessages);
-        // debugger;
         if (isAllValid) {
           form = JSON.stringify(form);
           votingManager.submitNomination('/wild', form);
