@@ -11,15 +11,18 @@
     margin-left: 0 !important;
 
     @include mobile {
-        width:80%;
+        // width:80%;
         font-size:0.95em;
 
         img {
-            width: 45%;
+            width: 48%;
             height: auto;
         }
     }
 
+    iframe {
+        max-width: 100%;
+    }
     input, textarea  {
         outline: none;
         border: 3px solid $blue;
@@ -106,6 +109,7 @@ label, h2 span {
     z-index: 2;
     position:relative;
     border-top: 0;
+    margin-top: 0;
 }
 
 .nanoModalBtn {
@@ -114,6 +118,7 @@ label, h2 span {
     font-size: 1em;
     font-weight: 400;
     letter-spacing: 0.015em;
+    margin-top: 0;
     font-family: 'Alegreya Sans', sans-serif;
      &:hover {
         background: $red;
