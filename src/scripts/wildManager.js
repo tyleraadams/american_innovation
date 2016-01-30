@@ -6,25 +6,27 @@ import validate from 'validate-js';
 import moment from 'moment';
 import utils from './utils';
 
-let wildManager = {
-  init: function () {
+const wildManager = {};
 
-    let openModalButton = document.getElementsByClassName('nominate')[0];
-    let comeBackDate = moment(JSON.parse(sessionStorage.getItem('currentRound'))['ending_date']).add('days', 1).format('MMMM D');
+wildManager.modalYesButton = {
+  text: 'Submit'
+};
+wildManager.modalNoButton = {
+  text: 'Cancel'
+  // handler: modalManager.modalNoHandler
+};
 
-    let yesButton  = {
-      text: 'Submit',
-    };
-    yesButton.handler = function (modal) {
-        let parentEl = event.target.parentElement.parentElement;
-        let form = parentEl.querySelector('form');
-        let name = form.querySelector('[name=name]').value;
-        let phone = form.querySelector('[name=phone]').value;
-        let innovation = form.querySelector('[name=innovation]').value;
-        let description = form.querySelector('[name=description]').value;
-        let email = form.querySelector('[name=email]').value;
+wildManager.modalYesHandler = function (modal) {
+    let formDom = modal.getContent();
 
-        form = {
+        // let form = parentEl.querySelector('form');
+        let name = formDom.querySelector('[name=name]').value;
+        let phone = formDom.querySelector('[name=phone]').value;
+        let innovation = formDom.querySelector('[name=innovation]').value;
+        let description = formDom.querySelector('[name=description]').value;
+        let email = formDom.querySelector('[name=email]').value;
+
+        let formData = {
           "name": name,
           "phone": phone,
           "innovation": innovation,
@@ -32,11 +34,11 @@ let wildManager = {
           "email": email
         };
 
-        let validationMessages = this.validateForm(form);
+        let validationMessages = this.validateForm(formData);
         let isAllValid = this.isAllValid(validationMessages);
         if (isAllValid) {
-          form = JSON.stringify(form);
-          votingManager.submitNomination('/wild', form);
+          formData = JSON.stringify(formData);
+          votingManager.submitNomination('/wild', formData);
           sessionStorage.setItem('innovationVotedFor', 'nomination');
           hasAlreadyVoted = true;
           innovationsManager.disableButtons();
@@ -45,49 +47,22 @@ let wildManager = {
           openModalButton.classList.add('disabled');
           openModalButton.classList.add('chosen');
         } else {
-          let container = parentEl.getElementsByClassName('wild-messages')[0];
+          let container = formDom.getElementsByClassName('wild-messages')[0];
           messageManager.showMessages(container, validationMessages);
         }
-    }.bind(this);
 
-    let cancelButton  = {
-      text: 'Cancel',
-      handler: function(modal) {
-        utils.delayHide(modal);
-      }
-    };
+};
 
-    let hasAlreadyVoted = sessionStorage.getItem('innovationVotedFor');
-    if (hasAlreadyVoted === 'wild') {
-      openModalButton.classList.add('disabled');
-      openModalButton.classList.add('chosen');
-    } else if (hasAlreadyVoted) {
-      openModalButton.classList.add('disabled');
-    };
+wildManager.modalNoHandler = function (modal) {
+  let hide = () => {
+    modal.hide()
+  }
 
-    let buttons = [ yesButton, cancelButton ];
-
-    let options = {
-      buttons: buttons,
-      classes: 'wild'
-    }
-
-    if (window.innerWidth <= 700) {
-      options.overlayClose = false;
-    }
+  utils.delayHide(modal);
+};
 
 
-    var modalObj = nanoModal(document.getElementsByClassName('wild-card')[0],
-                  options );
-
-    openModalButton.addEventListener('click', function (event) {
-      if (!hasAlreadyVoted) {
-        modalObj.show();
-      }
-    });
-  },
-
-  validateForm: function (form) {
+wildManager.validateForm = function (form) {
 
     let messages = Object.assign({}, form);
 
@@ -112,9 +87,9 @@ let wildManager = {
     }
 
     return messages;
-  },
+  };
 
-  isAllValid: function (messages) {
+  wildManager.isAllValid = function (messages) {
     let hasAnyProps = true;
     for (var key in messages) {
       hasAnyProps = false;
@@ -122,8 +97,57 @@ let wildManager = {
     }
 
     return hasAnyProps;
-  }
+  };
+  wildManager.buildButtons = function () {
+  // console.log( 'this inside ofbuild buttosn');
 
+  // if (isDisabled) {
+  //   this.modalYesButton.classes = 'disabled';
+  // } else {
+    this.modalYesButton.handler = this.modalYesHandler.bind(this);
+  // }
+
+  this.modalNoButton.handler = this.modalNoHandler;
+
+  return [this.modalYesButton, this.modalNoButton];
 };
+  wildManager.init = function () {
+
+    let openModalButton = document.getElementsByClassName('nominate')[0];
+    let comeBackDate = moment(JSON.parse(sessionStorage.getItem('currentRound'))['ending_date']).add('days', 1).format('MMMM D');
+
+
+
+    let hasAlreadyVoted = sessionStorage.getItem('innovationVotedFor');
+    if (hasAlreadyVoted === 'wild') {
+      openModalButton.classList.add('disabled');
+      openModalButton.classList.add('chosen');
+    } else if (hasAlreadyVoted) {
+      openModalButton.classList.add('disabled');
+    };
+
+    let buttons = this.buildButtons();
+
+    let options = {
+      buttons: buttons,
+      classes: 'wild'
+    }
+
+    if (window.innerWidth <= 700) {
+      options.overlayClose = false;
+    }
+
+
+    let wildCardModalObj = nanoModal(document.getElementsByClassName('wild-card')[0],
+                  options );
+
+    openModalButton.addEventListener('click', function (event) {
+      if (!hasAlreadyVoted) {
+        wildCardModalObj.show();
+      }
+    });
+  };
+
+
 
 export default wildManager;
