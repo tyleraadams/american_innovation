@@ -18,7 +18,7 @@ var dotenv = require('dotenv');
 
 dotenv.load();
 app.use(compression());
-
+app.enable('trust proxy');
 //Here we are configuring express to use body-parser as middle-ware.
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

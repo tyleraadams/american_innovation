@@ -17,6 +17,7 @@ modalManager.modalNoButton = {
 
 modalManager.modalYesHandler = function (action, targetButton) {
   return function (modal) {
+    debugger;
     targetButton.classList.add('chosen');
     votingManager.submitVote(action);
     utils.delayHide(modal);

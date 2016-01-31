@@ -27,18 +27,13 @@ main {
 
 .voting-form, .voting-form noscript {
     width: 100%;
-    height: 350px;
     max-width: 800px;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
     margin: 0 auto 0;
     align-content: space-around;
-    @include tablet {
-        height: 630px;
-    }
     @include mobile {
-        height: 1100px;
         width: 75%;
     }
 }
