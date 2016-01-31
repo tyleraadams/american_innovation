@@ -1,15 +1,19 @@
 import messageManager from './messageManager';
-
+import $ from 'jquery';
 
 let votingManager = {
 
     submitVote: function (path) {
-        return this.post(path).then(function(response) {
-            console.log("Success!", path);
-            messageManager.showMessage(response);
+        // return this.post(path).then(function(response) {
+        //     console.log("Success!", path);
+        //     messageManager.showMessage(response);
 
-        }, function(error) {
-            console.error("Failed!", error);
+        // }, function(error) {
+        //     console.error("Failed!", error);
+        // });
+
+        return $.post(path, function (result) {
+          messageManager.showMessage(result);
         });
     },
 
@@ -53,14 +57,19 @@ let votingManager = {
 
     submitNomination: function (path, formData) {
       // debugger
-      return this.post(path, formData).then(function(response) {
-        // debugger
-            console.log("Success!", path);
-            messageManager.showMessage(response);
+    // return this.post(path, formData).then(function(response) {
+    //     // debugger
+    //         console.log("Success!", path);
+    //         messageManager.showMessage(response);
 
-        }, function(error) {
-            console.error("Failed!", error);
-        });
+    //     }, function(error) {
+    //         console.error("Failed!", error);
+    //     });
+    // }
+
+      return $.post(path, formData, function(result){
+        messageManager.showMessage(result);
+      }, 'json');
     }
 };
 

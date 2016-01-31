@@ -14,10 +14,8 @@ router.post('/*', function(req, res) {
     var cookies = new Cookies( req, res, [process.env.COOKIE_KEY]);
     var round = new Round();
 
-    var ip = req.headers['x-forwarded-for'] ||
-     req.connection.remoteAddress ||
-     req.socket.remoteAddress ||
-     req.connection.socket.remoteAddress;
+    var ip = req.ip;
+    console.log('post request req.body ', req.body);
 
           // cookies.set('voted', votedForInnovation, {maxAge: timeLeft});
     round.findInnovationsForThisRound(function (err, currentRound) {

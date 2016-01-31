@@ -22,11 +22,6 @@ modalManager.modalYesHandler = function (action, targetButton) {
     utils.delayHide(modal);
     innovationsManager.disableButtons();
   };
-    // targetButton.classList.add('chosen');
-    // for (var i = 0; i < cogs.length; ++i) {
-    //   cogs[i].classList.add('voted');
-    // }
-
 };
 
 modalManager.modalNoHandler = function (modal) {
@@ -38,8 +33,6 @@ modalManager.modalNoHandler = function (modal) {
 };
 
 modalManager.buildButtons = function (isDisabled, action, targetButton) {
-  console.log( 'this inside ofbuild buttosn');
-
   if (isDisabled) {
     this.modalYesButton.classes = 'disabled';
   } else {
@@ -59,6 +52,12 @@ modalManager.buildInnovationModal = function (data, options) {
       height=${data.height}
       alt=\"${data.name}\">
     <p>${data.description}</p>
+    <p><iframe frameborder="0"
+      height="54"
+      src="http://www.wnyc.org/widgets/ondemand_player/takeaway/#file=http://audio.wnyc.org/takeaway/takeaway012416-${data.audio}.mp3"
+      width="474"></iframe>
+    </p>
+
     <p>Would you like to vote for this innnovation?</p>`
     , options);
 
@@ -66,7 +65,6 @@ modalManager.buildInnovationModal = function (data, options) {
 };
 
 modalManager.innovClickHandler = function (event)  {
-   // console.log('this inside of build innovClickHandler ', this);
   event.preventDefault();
   let data = {};
   let targetButton = event.currentTarget;
@@ -76,9 +74,10 @@ modalManager.innovClickHandler = function (event)  {
   data.src = targetButton.getAttribute('data-image');
   data.width = targetButton.getAttribute('data-image-width');
   data.height = targetButton.getAttribute('data-image-height');
+  data.audio = targetButton.getAttribute('data-audio');
   data.isDisabled = targetButton.classList.contains('disabled');
 
-  let options = { buttons: this.buildButtons(data.isDisabled, data.action, targetButton)};
+  let options = { buttons: this.buildButtons(data.isDisabled, data.action, targetButton), autoRemove: true};
 
 
   if (window.innerWidth <= 700) {

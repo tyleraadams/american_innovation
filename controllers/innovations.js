@@ -40,10 +40,7 @@ router.post('/*', function(req, res) {
     round.findInnovationsForThisRound(function (err, currentRound) {
       console.log('this is the currentRound ', currentRound);
       currentRound = currentRound[0];
-      var ip = req.headers['x-forwarded-for'] ||
-       req.connection.remoteAddress ||
-       req.socket.remoteAddress ||
-       req.connection.socket.remoteAddress;
+      var ip = req.ip;
 
       if (!cookies.get('voted')) {
           var vote = new Vote ({

@@ -9,6 +9,7 @@ let messageManager = {
       console.log(document.getElementsByClassName('messages'), document.getElementsByClassName('messages')[0]);
       let errorMessage = document.createElement('p');
       errorMessage.innerHTML = message;
+      errorMessage.textContent = message;
       messagesContainer.appendChild(errorMessage);
   },
 
@@ -19,6 +20,7 @@ let messageManager = {
     for (var message in messages) {
       let errorMessage = document.createElement('p');
       errorMessage.innerHTML = messages[message];
+      errorMessage.textContent = messages[message];
       container.appendChild(errorMessage);
     }
   },

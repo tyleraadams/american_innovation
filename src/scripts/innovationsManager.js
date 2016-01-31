@@ -2,7 +2,7 @@ import _ from 'lodash';
 import votingManager from './votingManager';
 import wildManager from './wildManager';
 import messageManager from './messageManager';
-
+import $ from 'jquery';
 import moment from 'moment';
 import utils from './utils';
 import modalManager from './modalManager';
@@ -21,16 +21,24 @@ let innovationsManager = {
   //     currentChild = currentChild.nextSibling;
   //     currentChild.classList.add('disabled');
   // };
-        this.get('/innovations').then(function(response) {
-          let innovations = response;
+      $.get('/innovations', function(response) {
+        // debugger;
+         let innovations = response;
           let buttons = that.insertButtonsIntoDom(innovations).getElementsByClassName('innov');
           Array.prototype.forEach.call(buttons, (button, index) => {
             button.addEventListener('click', modalManager.innovClickHandler.bind(modalManager));
           });
+      });
+        // this.get('/innovations').then(function(response) {
+        //   let innovations = response;
+        //   let buttons = that.insertButtonsIntoDom(innovations).getElementsByClassName('innov');
+        //   Array.prototype.forEach.call(buttons, (button, index) => {
+        //     button.addEventListener('click', modalManager.innovClickHandler.bind(modalManager));
+        //   });
 
-          }, function(error) {
-              console.error("Failed!", error);
-        });
+        //   }, function(error) {
+        //       console.error("Failed!", error);
+        // });
     },
     // http://www.html5rocks.com/en/tutorials/es6/promises/
     get: function (url) {
@@ -71,12 +79,12 @@ let innovationsManager = {
       let innovations;
       let innovationVotedFor;
       let currentRound = serverResponse;
-      serverResponse = JSON.parse(serverResponse);
-      let comeBackDate =  moment(JSON.parse(currentRound)['ending_date']).add('days', 1).format('MMMM D');
+      serverResponse = serverResponse;
+      let comeBackDate =  moment(currentRound['ending_date']).add('days', 1).format('MMMM D');
       let competitors = serverResponse.competitors;
       // console.log(currentRound);
       alreadyVotedFlag = competitors[competitors.length - 1].hasOwnProperty('votedCookie');
-      sessionStorage.setItem('currentRound', currentRound);
+      sessionStorage.setItem('currentRound', JSON.stringify(currentRound));
       if (alreadyVotedFlag) {
           innovationVotedFor = competitors.pop().votedCookie;
           sessionStorage.setItem('innovationVotedFor', innovationVotedFor);
@@ -91,13 +99,13 @@ let innovationsManager = {
             let span = document.createElement('span');
             img.src = innovation.image.thumb;
             img.alt = innovation.name;
-
             button.classList.add('innov');
             span.innerText = innovation.name;
-            // button.setAttribute('method', 'POST');
-            //
+            span.textContent = innovation.name;
+
             button.setAttribute('data-name', innovation.name);
             button.setAttribute('data-description', innovation.description);
+            button.setAttribute('data-audio', innovation.audio);
             button.setAttribute('data-image', innovation.image.src);
             button.setAttribute('data-image-width', innovation.image.width);
             button.setAttribute('data-image-height', innovation.image.height);
