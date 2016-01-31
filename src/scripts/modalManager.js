@@ -17,17 +17,11 @@ modalManager.modalNoButton = {
 
 modalManager.modalYesHandler = function (action, targetButton) {
   return function (modal) {
-    debugger;
     targetButton.classList.add('chosen');
     votingManager.submitVote(action);
     utils.delayHide(modal);
     innovationsManager.disableButtons();
   };
-    // targetButton.classList.add('chosen');
-    // for (var i = 0; i < cogs.length; ++i) {
-    //   cogs[i].classList.add('voted');
-    // }
-
 };
 
 modalManager.modalNoHandler = function (modal) {
@@ -39,8 +33,6 @@ modalManager.modalNoHandler = function (modal) {
 };
 
 modalManager.buildButtons = function (isDisabled, action, targetButton) {
-  console.log( 'this inside ofbuild buttosn');
-
   if (isDisabled) {
     this.modalYesButton.classes = 'disabled';
   } else {
@@ -73,7 +65,6 @@ modalManager.buildInnovationModal = function (data, options) {
 };
 
 modalManager.innovClickHandler = function (event)  {
-   // console.log('this inside of build innovClickHandler ', this);
   event.preventDefault();
   let data = {};
   let targetButton = event.currentTarget;
