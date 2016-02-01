@@ -7,6 +7,8 @@ var UserSchema = new mongoose.Schema({
 });
 
 
+
+
 // UserSchema.methods.findThisUser = function (cb) {
 
 //   // var startDate = new Date(2013, 1, 12)

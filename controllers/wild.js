@@ -15,7 +15,6 @@ router.post('/*', function(req, res) {
     var round = new Round();
 
     var ip = req.ip;
-    console.log('post request req.body ', req.body);
 
           // cookies.set('voted', votedForInnovation, {maxAge: timeLeft});
     round.findInnovationsForThisRound(function (err, currentRound) {

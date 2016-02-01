@@ -33,7 +33,7 @@ VoteSchema.methods.findVotesForThisRound = function (currentRound, cb) {
   return this.model('Vote').aggregate( [
     {
       $match: {
-        round: currentRound._id.toString()
+        round: currentRound.name
       }
     }, {
       $group: {

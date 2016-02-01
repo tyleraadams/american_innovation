@@ -38,7 +38,6 @@ router.post('/*', function(req, res) {
     var votedForInnovation = req.params[0].replace(/-/, ' ');
 
     round.findInnovationsForThisRound(function (err, currentRound) {
-      console.log('this is the currentRound ', currentRound);
       currentRound = currentRound[0];
       var ip = req.ip;
 

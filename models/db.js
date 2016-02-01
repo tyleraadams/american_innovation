@@ -10,24 +10,16 @@ var Innovation = require('../models/Innovation')
 
 
 User.find({}, function (err, results) {
-
   if (!results.length) {
-    // fixtures.rounds.forEach(function(item, index) {
-
-      var bcrypt = require('bcrypt');
-      bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash('B4c0/\/', salt, function(err, hash) {
-        // Store hash in your password DB.
-          var user = new User({username: 'admin', password: hash});
-          user.save();
-        });
+    var bcrypt = require('bcrypt');
+    bcrypt.genSalt(10, function(err, salt) {
+      bcrypt.hash(process.env.ADMIN_PASSWORD, salt, function(err, hash) {
+        var user = new User({username: process.env.ADMIN_USERNAME, password: hash});
+        user.save();
       });
-
-      round.save(item);
-    // });
+    });
   }
-
-})
+});
 
 
 Round.find({}, function (err, results) {
@@ -45,7 +37,6 @@ Round.find({}, function (err, results) {
 Innovation.find({}, function (err, results) {
   if (!results.length) {
     fixtures.innovations.forEach(function(item, index) {
-      console.log('!! !', item);
       var innovation = new Innovation(item);
       innovation.save(item);
     });

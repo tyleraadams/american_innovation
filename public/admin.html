@@ -1,0 +1,59 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>America's Greatest Innovation</title>
+        <meta name="description" content="Vote here for America's Greatest Innovation, a series from WNYC's The Takeaway">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <link rel="stylesheet" href="css/main.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,900|Alegreya+Sans:400' rel='stylesheet' type='text/css'>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.14/d3.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 11]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <main>
+            <section class="cog-wrapper">
+                <h1><span>American Innovations</span><br><span>Results</span></h1>
+                <h3 class="cta">Voting Submissions</h3>
+                <div class="results"></div>
+                <h3 class="cta">Nomination Submissions</h3>
+                <iframe id="nominationsSheetsWidget" width="1000" height="600" frameborder="0" scrolling="no" src=""></iframe>
+            </section>
+        </main>
+        <!-- <script src="js/main.js"></script> -->
+        <script>
+            $.get('/admin/results', function (results) {
+                var votingResults = results.votes;
+                var uri = results.nominationsSheetsUri;
+
+                d3.select('.results')
+                .selectAll("div")
+                .data(votingResults)
+                .enter().append("div")
+                .style("width", function(d) { return d.count * 10 + "px"; })
+                .text(function(d) { return d._id + ' ' + d.count; });
+
+
+                $('#nominationsSheetsWidget').attr('src', uri);
+
+            }, 'json');
+        </script>
+        <style>
+        .results div {
+            background: #0286B7;
+            border: 1px solid white;
+        }
+        .results {
+            margin-bottom: 20px;
+        }
+        .cta {
+            font-size: 1.5em;
+        }
+        </style>
+    </body>
+</html>
