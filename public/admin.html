@@ -30,12 +30,17 @@
             $.get('/admin/results', function (results) {
                 var votingResults = results.votes;
                 var uri = results.nominationsSheetsUri;
-
+                var data = votingResults.map(function (item) {
+                    return item.count;
+                })
+                var x = d3.scale.linear()
+                    .domain([0, d3.max(data)])
+                    .range([0, 420]);
                 d3.select('.results')
                 .selectAll("div")
                 .data(votingResults)
                 .enter().append("div")
-                .style("width", function(d) { return d.count * 10 + "px"; })
+                .style("width", function(d) { return x(d.count) + "px"; })
                 .text(function(d) { return d._id + ' ' + d.count; });
 
 

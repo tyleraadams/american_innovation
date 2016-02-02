@@ -42,7 +42,14 @@ VoteSchema.methods.findVotesForThisRound = function (currentRound, cb) {
           $sum: 1
         }
       }
+    },
+
+    {
+      $sort: {
+        sum: -1
+      }
     }
+
     ] , cb);
 
 
