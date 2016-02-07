@@ -1,13 +1,13 @@
 @-moz-document url-prefix() {
     .voting-form, .voting-form noscript {
-        height: 350px;
+        height: 240px;
 
         @include tablet {
-            height: 630px;
+            height: 365px;
         }
 
         @include mobile {
-            height: 1200px;
+            height: 550px;
         }
     }
 
