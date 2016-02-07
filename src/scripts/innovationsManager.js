@@ -29,16 +29,6 @@ let innovationsManager = {
             button.addEventListener('click', modalManager.innovClickHandler.bind(modalManager));
           });
       });
-        // this.get('/innovations').then(function(response) {
-        //   let innovations = response;
-        //   let buttons = that.insertButtonsIntoDom(innovations).getElementsByClassName('innov');
-        //   Array.prototype.forEach.call(buttons, (button, index) => {
-        //     button.addEventListener('click', modalManager.innovClickHandler.bind(modalManager));
-        //   });
-
-        //   }, function(error) {
-        //       console.error("Failed!", error);
-        // });
     },
     // http://www.html5rocks.com/en/tutorials/es6/promises/
     get: function (url) {

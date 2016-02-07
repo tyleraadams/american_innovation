@@ -21,8 +21,8 @@ router.get('/', function(req, res) {
       var competitors = currentRound.competitors;
       Innovation.find( { name: {$in: competitors}  }, function (err, innovations) {
         if (err) console.error(err);
-        if (cookies.get('voted')) {
-          innovations.push({ votedCookie: cookies.get('voted') });
+        if (cookies.get('voted:round2')) {
+          innovations.push({ votedCookie: cookies.get('voted:round2') });
         }
         currentRound.competitors = innovations;
         res.send(currentRound);
@@ -41,7 +41,7 @@ router.post('/*', function(req, res) {
       currentRound = currentRound[0];
       var ip = req.ip;
 
-      if (!cookies.get('voted')) {
+      if (!cookies.get('voted:round2')) {
           var vote = new Vote ({
               votedFor: votedForInnovation,
               round: currentRound.name,
@@ -51,7 +51,7 @@ router.post('/*', function(req, res) {
           var expiryDate = new Date(currentRound.ending_date);
           var today = new Date();
           var timeLeft = expiryDate - today;
-          cookies.set('voted', votedForInnovation, {maxAge: timeLeft});
+          cookies.set('voted:round2', votedForInnovation, {maxAge: timeLeft});
           vote.save(function (err, vote) {
               res.send('Thank you for voting, please check back ' + moment(currentRound['ending_date']).add('days', 1).format('MMMM D'));
           });
