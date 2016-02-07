@@ -21,6 +21,7 @@
                 <h1><span>American Innovations</span><br><span>Results</span></h1>
                 <h3 class="cta">Voting Submissions</h3>
                 <div class="results"></div>
+                <div class="total"></div>
                 <h3 class="cta">Nomination Submissions</h3>
                 <iframe id="nominationsSheetsWidget" width="1000" height="600" frameborder="0" scrolling="no" src=""></iframe>
             </section>
@@ -32,10 +33,13 @@
                 var uri = results.nominationsSheetsUri;
                 var data = votingResults.map(function (item) {
                     return item.count;
-                })
+                });
+                var total = data.reduce(function (prev, curr) {
+                    return prev + curr;
+                });
                 var x = d3.scale.linear()
                     .domain([0, d3.max(data)])
-                    .range([0, 420]);
+                    .range([0, 600]);
                 d3.select('.results')
                 .selectAll("div")
                 .data(votingResults)
@@ -43,7 +47,7 @@
                 .style("width", function(d) { return x(d.count) + "px"; })
                 .text(function(d) { return d._id + ' ' + d.count; });
 
-
+                $('.total').text('Total: ' + total);
                 $('#nominationsSheetsWidget').attr('src', uri);
 
             }, 'json');
