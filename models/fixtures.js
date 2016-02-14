@@ -9,7 +9,13 @@ module.exports = {
       name: 'Round 2',
       competitors: ['GPS','Mobile Phone','Sewing Machine','Air Conditioner','3D Printer'],
       starting_date: new Date("2016-02-07T12:00:01-05:00"),
-      ending_date: new Date("2016-02-14T23:59:59-05:00")
+      ending_date: new Date("2016-02-14T12:00:00-05:00")
+    },
+    {
+      name: 'Round 3',
+      competitors: ['GPS','Mobile Phone','Sewing Machine'],
+      starting_date: new Date("2016-02-14T12:00:01-05:00"),
+      ending_date: new Date("2016-02-19T07:00:00-05:00")
     }
   ],
   innovations: [
