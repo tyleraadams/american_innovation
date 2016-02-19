@@ -53,10 +53,10 @@ router.post('/*', function(req, res) {
           var timeLeft = expiryDate - today;
           cookies.set('voted:round3', votedForInnovation, {maxAge: timeLeft});
           vote.save(function (err, vote) {
-              res.send('Thank you for voting, please check back ' + moment(currentRound['ending_date']).add('days', 1).format('MMMM D'));
+              res.send('Thank you for voting, please check back ' + moment(currentRound['ending_date']).format('MMMM D'));
           });
       } else {
-          res.send('Sorry, you already voted! Please check back ' + moment(currentRound['ending_date']).add('days', 1).format('MMMM D'));
+          res.send('Sorry, you already voted! Please check back ' + moment(currentRound['ending_date']).format('MMMM D'));
       }
     });
 
