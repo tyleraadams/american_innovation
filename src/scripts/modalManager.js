@@ -45,22 +45,25 @@ modalManager.buildButtons = function (isDisabled, action, targetButton) {
 };
 
 modalManager.buildInnovationModal = function (data, options) {
-  let innovationModal = nanoModal(
-    `<h2><span>${data.name}</span></h2>
+  let innovationModal;
+  let markup = `<h2><span>${data.name}</span></h2>
     <img src=${data.src}
       width=${data.width}
       height=${data.height}
       alt=\"${data.name}\">
-    <p>${data.description}</p>
-    <p><iframe frameborder="0"
-      height="54"
-      src="http://www.wnyc.org/widgets/ondemand_player/takeaway/#file=http://audio.wnyc.org/takeaway/takeaway012416-${data.audio}.mp3"
-      width="474"></iframe>
-    </p>
+    <p>${data.description}</p>`;
 
-    <p>Would you like to vote for this innnovation?</p>`
-    , options);
-
+  const callToAction = `<p>Would you like to vote for this innnovation?</p>`;
+  if (data.audio !== 'undefined') {
+    const iframe =   `<p><iframe frameborder="0"
+        height="54"
+        src="http://www.wnyc.org/widgets/ondemand_player/takeaway/#file=http://audio.wnyc.org/takeaway/takeaway012416-${data.audio}.mp3"
+        width="474"></iframe>
+      </p>`;
+      markup += iframe;
+  }
+  markup += callToAction;
+  innovationModal = nanoModal(markup, options);
   return innovationModal;
 };
 

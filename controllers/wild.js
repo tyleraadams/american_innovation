@@ -11,30 +11,30 @@ var express = require('express')
 var CurrentRound;
 
 router.post('/*', function(req, res) {
-    var cookies = new Cookies( req, res, [process.env.COOKIE_KEY]);
-    var round = new Round();
+    // var cookies = new Cookies( req, res, [process.env.COOKIE_KEY]);
+    // var round = new Round();
 
-    var ip = req.ip;
+    // var ip = req.ip;
 
-          // cookies.set('voted', votedForInnovation, {maxAge: timeLeft});
-    round.findInnovationsForThisRound(function (err, currentRound) {
-      currentRound = currentRound[0];
+    //       // cookies.set('voted', votedForInnovation, {maxAge: timeLeft});
+    // round.findInnovationsForThisRound(function (err, currentRound) {
+    //   currentRound = currentRound[0];
 
-      if (!cookies.get('voted:round3')) {
-        var expiryDate = new Date(currentRound.ending_date);
-        var today = new Date();
-        var timeLeft = expiryDate - today;
-        var input = req.body;
-        input.ip = ip;
-        var wild = new Wild(input);
-        cookies.set('voted:round3', 'wild', { maxAge: timeLeft });
-        wild.save(function (err, vote) {
-          res.send('Thank you for voting, please check back ' + moment(currentRound['ending_date']).add('days', 1).format('MMMM D'));
-        });
-      } else {
-        res.send('Sorry, you already voted! Please check back ' + moment(currentRound['ending_date']).add('days', 1).format('MMMM D'));
-      }
-    });
+    //   if (!cookies.get('voted:round3')) {
+    //     var expiryDate = new Date(currentRound.ending_date);
+    //     var today = new Date();
+    //     var timeLeft = expiryDate - today;
+    //     var input = req.body;
+    //     input.ip = ip;
+    //     var wild = new Wild(input);
+    //     cookies.set('voted:round3', 'wild', { maxAge: timeLeft });
+    //     wild.save(function (err, vote) {
+    //       res.send('Thank you for voting, please check back ' + moment(currentRound['ending_date']).add('days', 1).format('MMMM D'));
+    //     });
+    //   } else {
+    //     res.send('Sorry, you already voted! Please check back ' + moment(currentRound['ending_date']).add('days', 1).format('MMMM D'));
+    //   }
+    // });
 
 
 });

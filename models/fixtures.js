@@ -16,10 +16,26 @@ module.exports = {
       competitors: ['GPS','Mobile Phone','Sewing Machine'],
       starting_date: new Date("2016-02-14T12:00:01-05:00"),
       ending_date: new Date("2016-02-19T07:00:00-05:00")
+    },
+    {
+      name: 'Round 4',
+      competitors: ['Transistor','Mobile Phone','Sewing Machine'],
+      starting_date: new Date("2016-02-19T07:00:01-05:00"),
+      ending_date: new Date("2016-02-26T22:00:01-05:00")
     }
   ],
   innovations: [
     {
+      name: 'Transistor',
+      description: 'Invented in 1947 by three men at Bell Laboratories, the transistor was designed to replace inefficient vacuum tubes as the key building block of America’s telephone network. It also made the miniaturization of technology possible, paving the way for computers, cell phones, GPS devices, and much more.',
+      eliminated: false,
+      image: {
+        src: '/images/transistor.png',
+        thumb: '/images/thumb_transistor.png',
+        width: 220,
+        height: 174
+      },
+    },{
       name: 'GPS',
       description: 'The Global Positioning System was first developed by the Defense Department in 1957 and became fully operational in 1993. Today, the GPS is used by pilots, adventurers, and lost travelers. Listen to Chris Catrambone, an American entrepreneur that is rescuing migrants and refugees in the Mediterranean, make his case for why the GPS is America\'s greatest innovation.',
       eliminated: false,

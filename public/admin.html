@@ -30,7 +30,6 @@
         <script>
             $.get('/admin/results', function (results) {
                 var votingResults = results.votes;
-                var uri = results.nominationsSheetsUri;
                 var data = votingResults.map(function (item) {
                     return item.count;
                 });
@@ -48,7 +47,6 @@
                 .text(function(d) { return d._id + ' ' + d.count; });
 
                 $('.total').text('Total: ' + total);
-                $('#nominationsSheetsWidget').attr('src', uri);
 
             }, 'json');
         </script>
