@@ -65,9 +65,8 @@ router.get('/results', function(req, res) {
             return;
           }
           var packagedResults = {
-            votes: votes,
-            nominationsSheetsUri: process.env.NOMINATIONS_SHEETS_URI
-          }
+            votes: votes
+          };
 
           res.send(packagedResults);
         });

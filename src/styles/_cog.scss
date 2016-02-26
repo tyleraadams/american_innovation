@@ -2,12 +2,20 @@
    Author's custom styles
    ========================================================================== */
 
+.sponsored .info {
+    font-size: 1.25em;
+    font-family: "Roboto",sans-serif;
+    text-align: left;
+}
 body {
     font-family: 'Roboto', sans-serif;
     overflow-x:hidden;
     background: url('../images/background.jpg');
 }
-
+footer {
+    height: 100%;
+    border-top: 1px dashed white;
+}
 main {
     overflow: hidden;
 

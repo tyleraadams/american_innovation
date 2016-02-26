@@ -1,11 +1,11 @@
 var express = require('express')
   , router = express.Router()
-  , innovations = require('./innovations')
+  // , innovations = require('./innovations')
   // , wild = require('./wild')
   , admin = require('./admin');
 
 
-router.use('/innovations', innovations);
+// router.use('/innovations', innovations);
 // router.use('/wild', wild);
 router.use('/admin', admin);
 
