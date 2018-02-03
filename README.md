@@ -1,4 +1,6 @@
-README.md
+#Greatest American Innovations
+
+This repo contains the code for http://greatestinnovation.org. This is a Node Express app. Get started with `npm start`.
 
 mongoexport --db american_innovations --collection wilds --type=csv --fields name,email,phone,innovation,description --out wildcards.csv
 
